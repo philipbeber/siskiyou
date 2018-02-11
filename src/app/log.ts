@@ -1,5 +1,5 @@
-import { LogLine } from './log-line';
+import { LogLine } from "./log-line";
 
 export class Log {
-    public lines: LogLine[];
+  public lines: LogLine[];
 }

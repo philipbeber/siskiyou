@@ -1,15 +1,18 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from "@angular/core/testing";
 
-import { LogAnalysisService } from './log-analysis.service';
+import { LogAnalysisService } from "./log-analysis.service";
 
-describe('LogAnalysisService', () => {
+describe("LogAnalysisService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [LogAnalysisService]
     });
   });
 
-  it('should be created', inject([LogAnalysisService], (service: LogAnalysisService) => {
-    expect(service).toBeTruthy();
-  }));
+  it(
+    "should be created",
+    inject([LogAnalysisService], (service: LogAnalysisService) => {
+      expect(service).toBeTruthy();
+    })
+  );
 });

@@ -1,17 +1,18 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DropdemoComponent } from './dropdemo.component';
+import { DropdemoComponent } from "./dropdemo.component";
 
-describe('DropdemoComponent', () => {
+describe("DropdemoComponent", () => {
   let component: DropdemoComponent;
   let fixture: ComponentFixture<DropdemoComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DropdemoComponent ]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        declarations: [DropdemoComponent]
+      }).compileComponents();
     })
-    .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DropdemoComponent);
@@ -19,7 +20,7 @@ describe('DropdemoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
