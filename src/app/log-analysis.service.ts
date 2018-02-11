@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Log } from './log';
-import { LogLine } from './log-line';
-import { FileLoader } from './file-loader';
-import { LogMerger } from './log-merger';
+import { Injectable } from "@angular/core";
+import { Log } from "./log";
+import { LogLine } from "./log-line";
+import { FileLoader } from "./file-loader";
+import { LogMerger } from "./log-merger";
 
 @Injectable()
 export class LogAnalysisService {
-
-  constructor() { }
+  constructor() {}
 
   private logs: Log[] = [];
   private lines: LogLine[] = [];
@@ -18,6 +17,4 @@ export class LogAnalysisService {
       this.lines = new LogMerger().merge(this.logs);
     });
   }
-}
-
 }
