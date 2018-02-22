@@ -31,11 +31,7 @@ export class LogMerger {
       // Remove dupes
       var nextLine = logs[nextLog].lines[indices[nextLog]];
       var prevLine = lines.length == 0 ? null : lines[lines.length - 1];
-      if (
-        prevLine == null ||
-        prevLine.text != nextLine.text ||
-        prevLine.Log != nextLine.Log
-      ) {
+      if (prevLine == null || prevLine.text != nextLine.text) {
         lines.push(nextLine);
       }
 

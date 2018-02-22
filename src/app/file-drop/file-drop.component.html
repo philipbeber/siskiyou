@@ -1,0 +1,5 @@
+<div id="dropZone" [class.over]="dragoverflag" class="file-drop-zone"
+    (drop)="dropFiles($event)"
+    (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+        <ng-content></ng-content>
+</div>

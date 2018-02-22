@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { UploadEvent, UploadFile } from "ngx-file-drop";
+import { DroppedFile, FileDropEvent } from "../file-drop";
 import { LogAnalysisService } from "../log-analysis.service";
 
 @Component({
@@ -8,12 +8,12 @@ import { LogAnalysisService } from "../log-analysis.service";
   styleUrls: ["./dropdemo.component.css"]
 })
 export class DropdemoComponent {
-  public files: UploadFile[] = [];
+  public files: DroppedFile[] = [];
   public fileNames: string[] = [];
 
-  constructor(private logAnalysis: LogAnalysisService) {}
+  constructor(public logAnalysis: LogAnalysisService) {}
 
-  public dropped(event: UploadEvent) {
+  public dropped(event: FileDropEvent) {
     this.files = event.files;
     let infos = [];
     for (const file of event.files) {
