@@ -1,0 +1,29 @@
+<div *ngIf="data" ngbDropdown class="d-inline-block">
+  <button class="btn btn-outline-primary" id="multiSelector" ngbDropdownToggle>{{data.title}}</button>
+  <div ngbDropdownMenu aria-labelledby="multiSelector">
+    <input type="checkbox" (click)="checkClicked($event)" [(ngModel)]="data.enabled"> enabled
+    <table *ngIf="data.headers && data.enabled">
+      <thead>
+        <tr>
+          <th><a href="#" (click)="selectAll()" class="selectable-item">all</a></th>
+          <th *ngFor="let header of data.headers">{{header}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of data.items">
+          <td><input type="checkbox"
+            (click)="checkClicked($event)" [(ngModel)]="item.isSelected"></td>
+          <td *ngFor="let cell of item.cells">{{cell}}</td>
+          <td><a href="#" (click)="onlyClicked(item)">only</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!data.headers && data.enabled">
+      <div *ngFor="let item of data.items" class="selectable-item"><input type="checkbox"
+        (click)="checkClicked($event)" [(ngModel)]="item.isSelected"> {{item.name}}
+        <a href="#" (click)="onlyClicked(item)">only</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+.file-drop {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.main-area {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+}
+
+.selectors {
+  flex: 0 1 40px;
+}
+
+.filtered-display {
+  flex: 1 1 auto;
+  overflow: scroll;
+}
+
+.no-files {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.no-files p {
+  margin: auto;
+}

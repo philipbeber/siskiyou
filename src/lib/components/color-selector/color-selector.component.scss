@@ -1,0 +1,47 @@
+a {
+  padding: 0.25rem 1.5rem;
+}
+table {
+  width: 600px;
+}
+table th a {
+  font-weight: normal;
+}
+.disabled {
+  pointer-events: none;
+}
+.filter {
+  display: flex;
+  min-width: 30em;
+  * {
+    margin-left: 0.5em;
+  }
+  .is-enabled {
+
+  }
+  .text-input {
+    flex-grow: 1;
+  }
+  .color-input {
+    width: 5em;
+  }
+  *:last-child {
+    margin-right: 0.5em;
+  }
+}
+.newFilter {
+  display: flex;
+  min-width: 30em;
+  * {
+    margin-left: 0.5em;
+  }
+  .text-input {
+    flex-grow: 1;
+  }
+  .color-input {
+    width: 5em;
+  }
+  button {
+    margin-right: 0.5em;
+  }
+}

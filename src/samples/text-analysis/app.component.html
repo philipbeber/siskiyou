@@ -1,0 +1,20 @@
+<file-drop class="file-drop" (onFileDrop)="dropped($event)">
+  <div class="main-area">
+    <div class="container-fluid selectors">
+      <div class="row">
+        <div class="col">
+          <selectors></selectors>
+        </div>
+      </div>
+    </div>
+    <div class="filtered-display">
+      <div #filteredDisplay></div>
+      <div *ngIf="noFiles" class="no-files">
+        <p>Drop some files to get started</p>
+      </div>
+      <div *ngIf="noLines" class="no-files">
+        <p>All lines are hidden by filters</p>
+      </div>
+    </div>
+  </div>
+</file-drop>

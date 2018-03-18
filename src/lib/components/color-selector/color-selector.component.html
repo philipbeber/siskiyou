@@ -1,0 +1,16 @@
+<div *ngIf="data">
+  <a href="#" (click)="selectAll()">all</a>
+  <a href="#" (click)="selectNone()">none</a>
+  <div *ngFor="let item of data.items" class="filter">
+    <input class="is-enabled" type="checkbox" (click)="checkClicked($event)" [(ngModel)]="item.isEnabled">
+    <input class="text-input" type="text" [(ngModel)]="item.name">
+    <input class="color-input" [(colorPicker)]="item.color" [style.background]="item.color" [value]="item.color"/>
+    <a href="#" (click)="onlyClicked(item)">only</a>
+    <a class="" href="#" (click)="deleteClicked(item)">delete</a>
+  </div>
+  <div class="newFilter">
+    <input class="text-input" type="text" [(ngModel)]="newText" placeholder="New...">
+    <input class="color-input" [(colorPicker)]="newColor" [style.background]="newColor" [value]="newColor" cpPosition="bottom"/>
+    <button [disabled]="!newText" class="btn btn-sm btn-outline-primary" (click)="createClicked()">create</button>
+  </div>
+</div>
