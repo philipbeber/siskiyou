@@ -9,13 +9,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pretty": "prettier --write src/**/*.ts"
+    "pretty": "prettier --write src/**/*.ts",
+    "builddocs": "ng build --bh /siskiyou/ && rimraf docs && copyfiles -u 1 dist/** docs"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^5.2.0",
     "@angular/common": "^5.2.0",
-    "@angular/compiler": "^5.2.0",
     "@angular/core": "^5.2.0",
     "@angular/forms": "^5.2.0",
     "@angular/http": "^5.2.0",
@@ -32,12 +32,14 @@
   },
   "devDependencies": {
     "@angular/cli": "^1.7.3",
+    "@angular/compiler": "^5.2.9",
     "@angular/compiler-cli": "^5.2.9",
     "@angular/language-service": "^5.2.9",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^6.0.102",
     "codelyzer": "^4.2.1",
+    "copyfiles": "^2.0.0",
     "jasmine-core": "~2.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~2.0.0",
@@ -48,6 +50,7 @@
     "moment": "^2.21.0",
     "prettier": "1.10.2",
     "protractor": "~5.1.2",
+    "rimraf": "^2.6.2",
     "ts-node": "~4.1.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
