@@ -21,7 +21,7 @@ export class AppComponent {
   @ViewChild('filteredDisplay') filteredDisplay : ElementRef;
 
   constructor(private logAnalysis: LogAnalysisService) {
-    this.colorFilter = new Filter("Colors", [], true);
+    this.colorFilter = new Filter("Color", [], true);
     logAnalysis.addFilter(this.colorFilter);
     this.logAnalysis.changed.debounceTime(400).subscribe(() => { this.updateView(); });
   }
@@ -40,6 +40,9 @@ export class AppComponent {
   }
 
   private updateView() {
+    if (this.noFiles) {
+      return;
+    }
     let m = moment();
     console.log("Starting GFL");
     const el = this.filteredDisplay.nativeElement;

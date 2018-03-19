@@ -1,47 +1,45 @@
+.filter {
+  padding: 0.25em;
+}
+.top-options {
+  display: flex;
+}
+.enabled-option {
+  margin: 0 5em 0.5em 0.25em
+}
+th {
+  padding: 0 0.5em 0 0;
+  text-align: center;
+}
+td {
+  padding: 0 0.5em 0.5em 0;
+  text-align: center;
+}
 a {
-  padding: 0.25rem 1.5rem;
-}
-table {
-  width: 600px;
-}
-table th a {
   font-weight: normal;
 }
-.disabled {
-  pointer-events: none;
+table {
+  table-layout: fixed;
+  width: 38em;
 }
-.filter {
-  display: flex;
-  min-width: 30em;
-  * {
-    margin-left: 0.5em;
-  }
-  .is-enabled {
-
-  }
-  .text-input {
-    flex-grow: 1;
-  }
-  .color-input {
-    width: 5em;
-  }
-  *:last-child {
-    margin-right: 0.5em;
-  }
+.sa-column {
+  width: 2em;
 }
-.newFilter {
-  display: flex;
-  min-width: 30em;
-  * {
-    margin-left: 0.5em;
-  }
-  .text-input {
-    flex-grow: 1;
-  }
-  .color-input {
-    width: 5em;
-  }
-  button {
-    margin-right: 0.5em;
-  }
+.header-column {
+  width: 20em;
+}
+.color-column {
+  width: 10em;
+}
+.only-column {
+  width: 3em;
+}
+.delete-column {
+  width: 4em;
+}
+.text-input {
+  width: 100%;
+}
+.color-input {
+  width: 100%;
 }

@@ -1,16 +1,55 @@
-<div *ngIf="data">
-  <a href="#" (click)="selectAll()">all</a>
-  <a href="#" (click)="selectNone()">none</a>
-  <div *ngFor="let item of data.items" class="filter">
-    <input class="is-enabled" type="checkbox" (click)="checkClicked($event)" [(ngModel)]="item.isEnabled">
-    <input class="text-input" type="text" [(ngModel)]="item.name">
-    <input class="color-input" [(colorPicker)]="item.color" [style.background]="item.color" [value]="item.color"/>
-    <a href="#" (click)="onlyClicked(item)">only</a>
-    <a class="" href="#" (click)="deleteClicked(item)">delete</a>
+<div *ngIf="filter" class="filter">
+  <div class="top-options">
+    <div class="enabled-option">
+      <input type="checkbox" [(ngModel)]="filter.enabled"> enabled
+    </div>
+    <div class="hide-option">
+      <input type="checkbox" [(ngModel)]="filter.hideUnfiltered" class="hide-option"> hide uncolored lines
+    </div>
   </div>
-  <div class="newFilter">
-    <input class="text-input" type="text" [(ngModel)]="newText" placeholder="New...">
-    <input class="color-input" [(colorPicker)]="newColor" [style.background]="newColor" [value]="newColor" cpPosition="bottom"/>
-    <button [disabled]="!newText" class="btn btn-sm btn-outline-primary" (click)="createClicked()">create</button>
-  </div>
+  <table *ngIf="filter.enabled">
+    <colgroup>
+      <col class="sa-column">
+      <col class="header-column">
+      <col class="color-column">
+      <col class="only-column">
+      <col class="delete-column">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="sa-column"><a href="#" (click)="selectAll($event)">all</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of filter.items">
+        <td class="sa-column">
+          <input type="checkbox" [(ngModel)]="item.isEnabled">
+        </td>
+        <td>
+          <input class="text-input" type="text" [(ngModel)]="item.name">
+        </td>
+        <td>
+          <input class="color-input" [(colorPicker)]="item.color" [style.background]="item.color" [value]="item.color"/>
+        </td>
+        <td>
+          <a href="#" (click)="onlyClicked($event, item)">only</a>
+        </td>
+        <td>
+          <a class="" href="#" (click)="deleteClicked($event, item)">delete</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="sa-column"></td>
+        <td>
+          <input class="text-input" type="text" [(ngModel)]="newText" placeholder="New...">
+        </td>
+        <td>
+          <input [hidden]="!newText" class="color-input" [(colorPicker)]="newColor" [style.background]="newColor" [value]="newColor" cpPosition="bottom"/>
+        </td>
+        <td>
+          <a [hidden]="!newText" href="#" (click)="createClicked($event)">create</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

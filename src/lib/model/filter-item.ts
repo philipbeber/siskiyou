@@ -5,12 +5,17 @@ import { Filter } from "./filter";
 
 export class FilterItem {
 
+  public get cells() {
+    return [this.name];
+  }
+
   public constructor(name: string, isEnabled: boolean, protected filter: Filter) {
     this._name = name;
     this._isEnabled = isEnabled;
   }
 
   public updateView(view: LogLineView, line: LogLine) {
+    return false;
   }
 
   private _isEnabled: boolean;

@@ -8,6 +8,7 @@ export class Filter {
 
   private changedSubject: Subject<void> = new Subject();
   public changed: Observable<void> = this.changedSubject.asObservable();
+  public headers: Array<string> = [ "" ];
 
   public constructor(public title: string, public items: FilterItem[], enabled: boolean) {
     this._enabled = enabled;
@@ -18,11 +19,16 @@ export class Filter {
       return;
     }
 
+    var matchedOne = false;
     for (let item of this.items) {
-      item.updateView(view, line);
+      matchedOne = item.updateView(view, line) || matchedOne;
       if (!view.visible) {
         return;
       }
+    }
+
+    if (!matchedOne && this.hideUnfiltered) {
+      view.visible = false;
     }
   }
 
@@ -31,6 +37,16 @@ export class Filter {
   public set enabled(value: boolean) {
     let oldValue = this._enabled;
     this._enabled = value;
+    if (oldValue != value) {
+      this.changedSubject.next();
+    }
+  }
+
+  private _hideUnfiltered: boolean;
+  public get hideUnfiltered() { return this._hideUnfiltered; }
+  public set hideUnfiltered(value: boolean) {
+    let oldValue = this._hideUnfiltered;
+    this._hideUnfiltered = value;
     if (oldValue != value) {
       this.changedSubject.next();
     }

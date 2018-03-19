@@ -17,7 +17,13 @@ import { LogParserService } from "./services/log-parser.service";
   declarations: [MultiSelectorComponent, ColorPickerDirective],
   exports: [MultiSelectorComponent, ColorPickerDirective],
   imports: [NgbModule, BrowserModule, FormsModule, HttpClientModule],
-  providers: [FileLoaderService, LogAnalysisService, ColorPickerService, LogMergerService, LogParserService],
+  providers: [
+    FileLoaderService,
+    LogAnalysisService,
+    ColorPickerService,
+    LogMergerService,
+    LogParserService
+  ],
   bootstrap: [MultiSelectorComponent]
 })
 export class SiskiyouModule {}

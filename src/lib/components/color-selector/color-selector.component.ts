@@ -11,7 +11,7 @@ import { ColorFilterItem } from './color-filter-item';
 export class ColorSelectorComponent implements OnInit {
 
   @Input()
-  public data: Filter;
+  public filter: Filter;
 
   private newText: string;
   private newColor: string;
@@ -45,31 +45,36 @@ export class ColorSelectorComponent implements OnInit {
     event.stopPropagation();
   }
 
-  onlyClicked(clickedItem: FilterItem) {
-    for (let item of this.data.items) {
+  onlyClicked(event, clickedItem: FilterItem) {
+    event.stopPropagation();
+    for (let item of this.filter.items) {
       item.isEnabled = item === clickedItem;
     }
   }
 
-  deleteClicked(clickedItem: FilterItem) {
-    this.data.deleteItem(clickedItem);
+  deleteClicked(event, clickedItem: FilterItem) {
+    event.stopPropagation();
+    this.filter.deleteItem(clickedItem);
   }
 
-  selectAll() {
-    for (let item of this.data.items) {
+  selectAll(event) {
+    event.stopPropagation();
+    for (let item of this.filter.items) {
       item.isEnabled = true;
     }
   }
 
-  selectNone() {
-    for (let item of this.data.items) {
+  selectNone(event) {
+    event.stopPropagation();
+    for (let item of this.filter.items) {
       item.isEnabled = false;
     }
   }
 
-  createClicked() {
-    const newItem = new ColorFilterItem(this.newText, true, this.data, this.newColor);
-    this.data.addItem(newItem);
+  createClicked(event) {
+    event.stopPropagation();
+    const newItem = new ColorFilterItem(this.newText, true, this.filter, this.newColor);
+    this.filter.addItem(newItem);
     this.newText = null;
     this.setRandomColor();
   }

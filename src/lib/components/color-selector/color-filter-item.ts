@@ -12,7 +12,9 @@ export class ColorFilterItem extends FilterItem {
   public updateView(view: LogLineView, line: LogLine) {
     if (this.isEnabled && line.text.indexOf(this.name) >= 0) {
       (view as LogLineColorView).color = this.color;
+      return true;
     }
+    return false;
   }
 
   public get color() { return this._color; }
