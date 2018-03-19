@@ -1303,7 +1303,9 @@ var ColorFilterItem = /** @class */ (function (_super) {
     ColorFilterItem.prototype.updateView = function (view, line) {
         if (this.isEnabled && line.text.indexOf(this.name) >= 0) {
             view.color = this.color;
+            return true;
         }
+        return false;
     };
     Object.defineProperty(ColorFilterItem.prototype, "color", {
         get: function () { return this._color; },
@@ -1327,14 +1329,14 @@ var ColorFilterItem = /** @class */ (function (_super) {
 /***/ "./src/lib/components/color-selector/color-selector.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"data\">\n  <a href=\"#\" (click)=\"selectAll()\">all</a>\n  <a href=\"#\" (click)=\"selectNone()\">none</a>\n  <div *ngFor=\"let item of data.items\" class=\"filter\">\n    <input class=\"is-enabled\" type=\"checkbox\" (click)=\"checkClicked($event)\" [(ngModel)]=\"item.isEnabled\">\n    <input class=\"text-input\" type=\"text\" [(ngModel)]=\"item.name\">\n    <input class=\"color-input\" [(colorPicker)]=\"item.color\" [style.background]=\"item.color\" [value]=\"item.color\"/>\n    <a href=\"#\" (click)=\"onlyClicked(item)\">only</a>\n    <a class=\"\" href=\"#\" (click)=\"deleteClicked(item)\">delete</a>\n  </div>\n  <div class=\"newFilter\">\n    <input class=\"text-input\" type=\"text\" [(ngModel)]=\"newText\" placeholder=\"New...\">\n    <input class=\"color-input\" [(colorPicker)]=\"newColor\" [style.background]=\"newColor\" [value]=\"newColor\" cpPosition=\"bottom\"/>\n    <button [disabled]=\"!newText\" class=\"btn btn-sm btn-outline-primary\" (click)=\"createClicked()\">create</button>\n  </div>\n</div>\n"
+module.exports = "<div *ngIf=\"filter\" class=\"filter\">\n  <div class=\"top-options\">\n    <div class=\"enabled-option\">\n      <input type=\"checkbox\" [(ngModel)]=\"filter.enabled\"> enabled\n    </div>\n    <div class=\"hide-option\">\n      <input type=\"checkbox\" [(ngModel)]=\"filter.hideUnfiltered\" class=\"hide-option\"> hide uncolored lines\n    </div>\n  </div>\n  <table *ngIf=\"filter.enabled\">\n    <colgroup>\n      <col class=\"sa-column\">\n      <col class=\"header-column\">\n      <col class=\"color-column\">\n      <col class=\"only-column\">\n      <col class=\"delete-column\">\n    </colgroup>\n    <thead>\n      <tr>\n        <th class=\"sa-column\"><a href=\"#\" (click)=\"selectAll($event)\">all</a></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr *ngFor=\"let item of filter.items\">\n        <td class=\"sa-column\">\n          <input type=\"checkbox\" [(ngModel)]=\"item.isEnabled\">\n        </td>\n        <td>\n          <input class=\"text-input\" type=\"text\" [(ngModel)]=\"item.name\">\n        </td>\n        <td>\n          <input class=\"color-input\" [(colorPicker)]=\"item.color\" [style.background]=\"item.color\" [value]=\"item.color\"/>\n        </td>\n        <td>\n          <a href=\"#\" (click)=\"onlyClicked($event, item)\">only</a>\n        </td>\n        <td>\n          <a class=\"\" href=\"#\" (click)=\"deleteClicked($event, item)\">delete</a>\n        </td>\n      </tr>\n      <tr>\n        <td class=\"sa-column\"></td>\n        <td>\n          <input class=\"text-input\" type=\"text\" [(ngModel)]=\"newText\" placeholder=\"New...\">\n        </td>\n        <td>\n          <input [hidden]=\"!newText\" class=\"color-input\" [(colorPicker)]=\"newColor\" [style.background]=\"newColor\" [value]=\"newColor\" cpPosition=\"bottom\"/>\n        </td>\n        <td>\n          <a [hidden]=\"!newText\" href=\"#\" (click)=\"createClicked($event)\">create</a>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
 /***/ "./src/lib/components/color-selector/color-selector.component.scss":
 /***/ (function(module, exports) {
 
-module.exports = "a {\n  padding: 0.25rem 1.5rem; }\n\ntable {\n  width: 600px; }\n\ntable th a {\n  font-weight: normal; }\n\n.disabled {\n  pointer-events: none; }\n\n.filter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  min-width: 30em; }\n\n.filter * {\n    margin-left: 0.5em; }\n\n.filter .text-input {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1; }\n\n.filter .color-input {\n    width: 5em; }\n\n.filter *:last-child {\n    margin-right: 0.5em; }\n\n.newFilter {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  min-width: 30em; }\n\n.newFilter * {\n    margin-left: 0.5em; }\n\n.newFilter .text-input {\n    -webkit-box-flex: 1;\n        -ms-flex-positive: 1;\n            flex-grow: 1; }\n\n.newFilter .color-input {\n    width: 5em; }\n\n.newFilter button {\n    margin-right: 0.5em; }\n"
+module.exports = ".filter {\n  padding: 0.25em; }\n\n.top-options {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n\n.enabled-option {\n  margin: 0 5em 0.5em 0.25em; }\n\nth {\n  padding: 0 0.5em 0 0;\n  text-align: center; }\n\ntd {\n  padding: 0 0.5em 0.5em 0;\n  text-align: center; }\n\na {\n  font-weight: normal; }\n\ntable {\n  table-layout: fixed;\n  width: 38em; }\n\n.sa-column {\n  width: 2em; }\n\n.header-column {\n  width: 20em; }\n\n.color-column {\n  width: 10em; }\n\n.only-column {\n  width: 3em; }\n\n.delete-column {\n  width: 4em; }\n\n.text-input {\n  width: 100%; }\n\n.color-input {\n  width: 100%; }\n"
 
 /***/ }),
 
@@ -1411,37 +1413,42 @@ var ColorSelectorComponent = /** @class */ (function () {
     ColorSelectorComponent.prototype.checkClicked = function (event) {
         event.stopPropagation();
     };
-    ColorSelectorComponent.prototype.onlyClicked = function (clickedItem) {
-        for (var _i = 0, _a = this.data.items; _i < _a.length; _i++) {
+    ColorSelectorComponent.prototype.onlyClicked = function (event, clickedItem) {
+        event.stopPropagation();
+        for (var _i = 0, _a = this.filter.items; _i < _a.length; _i++) {
             var item = _a[_i];
             item.isEnabled = item === clickedItem;
         }
     };
-    ColorSelectorComponent.prototype.deleteClicked = function (clickedItem) {
-        this.data.deleteItem(clickedItem);
+    ColorSelectorComponent.prototype.deleteClicked = function (event, clickedItem) {
+        event.stopPropagation();
+        this.filter.deleteItem(clickedItem);
     };
-    ColorSelectorComponent.prototype.selectAll = function () {
-        for (var _i = 0, _a = this.data.items; _i < _a.length; _i++) {
+    ColorSelectorComponent.prototype.selectAll = function (event) {
+        event.stopPropagation();
+        for (var _i = 0, _a = this.filter.items; _i < _a.length; _i++) {
             var item = _a[_i];
             item.isEnabled = true;
         }
     };
-    ColorSelectorComponent.prototype.selectNone = function () {
-        for (var _i = 0, _a = this.data.items; _i < _a.length; _i++) {
+    ColorSelectorComponent.prototype.selectNone = function (event) {
+        event.stopPropagation();
+        for (var _i = 0, _a = this.filter.items; _i < _a.length; _i++) {
             var item = _a[_i];
             item.isEnabled = false;
         }
     };
-    ColorSelectorComponent.prototype.createClicked = function () {
-        var newItem = new __WEBPACK_IMPORTED_MODULE_3__color_filter_item__["a" /* ColorFilterItem */](this.newText, true, this.data, this.newColor);
-        this.data.addItem(newItem);
+    ColorSelectorComponent.prototype.createClicked = function (event) {
+        event.stopPropagation();
+        var newItem = new __WEBPACK_IMPORTED_MODULE_3__color_filter_item__["a" /* ColorFilterItem */](this.newText, true, this.filter, this.newColor);
+        this.filter.addItem(newItem);
         this.newText = null;
         this.setRandomColor();
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Input */])(),
         __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__model__["a" /* Filter */])
-    ], ColorSelectorComponent.prototype, "data", void 0);
+    ], ColorSelectorComponent.prototype, "filter", void 0);
     ColorSelectorComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'color-selector',
@@ -1790,7 +1797,7 @@ module.exports = "\n\n"
 /***/ "./src/lib/components/selectors/selectors.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let filter of logAnalysis.getFilters()\" ngbDropdown class=\"d-inline-block\" [autoClose]=\"false\">\n  <button class=\"btn btn-outline-primary\" id=\"colorSelector\" ngbDropdownToggle>{{filter.title}}</button>\n  <div ngbDropdownMenu aria-labelledby=\"colorSelector\">\n    <color-selector [data]=\"filter\"></color-selector>\n  </div>\n</div>\n"
+module.exports = "<div *ngFor=\"let filter of logAnalysis.getFilters()\" ngbDropdown class=\"d-inline-block\" [autoClose]=\"false\">\n  <button class=\"btn btn-outline-primary\" id=\"colorSelector\" ngbDropdownToggle>{{filter.title}}</button>\n  <div ngbDropdownMenu aria-labelledby=\"colorSelector\">\n    <color-selector [filter]=\"filter\"></color-selector>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1842,7 +1849,15 @@ var FilterItem = /** @class */ (function () {
         this._name = name;
         this._isEnabled = isEnabled;
     }
+    Object.defineProperty(FilterItem.prototype, "cells", {
+        get: function () {
+            return [this.name];
+        },
+        enumerable: true,
+        configurable: true
+    });
     FilterItem.prototype.updateView = function (view, line) {
+        return false;
     };
     Object.defineProperty(FilterItem.prototype, "isEnabled", {
         get: function () { return this._isEnabled; },
@@ -1892,18 +1907,23 @@ var Filter = /** @class */ (function () {
         this.items = items;
         this.changedSubject = new __WEBPACK_IMPORTED_MODULE_0_rxjs__["Subject"]();
         this.changed = this.changedSubject.asObservable();
+        this.headers = [""];
         this._enabled = enabled;
     }
     Filter.prototype.updateView = function (view, line) {
         if (!this.enabled) {
             return;
         }
+        var matchedOne = false;
         for (var _i = 0, _a = this.items; _i < _a.length; _i++) {
             var item = _a[_i];
-            item.updateView(view, line);
+            matchedOne = item.updateView(view, line) || matchedOne;
             if (!view.visible) {
                 return;
             }
+        }
+        if (!matchedOne && this.hideUnfiltered) {
+            view.visible = false;
         }
     };
     Object.defineProperty(Filter.prototype, "enabled", {
@@ -1911,6 +1931,18 @@ var Filter = /** @class */ (function () {
         set: function (value) {
             var oldValue = this._enabled;
             this._enabled = value;
+            if (oldValue != value) {
+                this.changedSubject.next();
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Filter.prototype, "hideUnfiltered", {
+        get: function () { return this._hideUnfiltered; },
+        set: function (value) {
+            var oldValue = this._hideUnfiltered;
+            this._hideUnfiltered = value;
             if (oldValue != value) {
                 this.changedSubject.next();
             }
@@ -2691,7 +2723,13 @@ var SiskiyouModule = /** @class */ (function () {
             declarations: [__WEBPACK_IMPORTED_MODULE_1__components_multi_selector_multi_selector_component__["a" /* MultiSelectorComponent */], __WEBPACK_IMPORTED_MODULE_3__components_color_picker__["a" /* ColorPickerDirective */]],
             exports: [__WEBPACK_IMPORTED_MODULE_1__components_multi_selector_multi_selector_component__["a" /* MultiSelectorComponent */], __WEBPACK_IMPORTED_MODULE_3__components_color_picker__["a" /* ColorPickerDirective */]],
             imports: [__WEBPACK_IMPORTED_MODULE_5__ng_bootstrap_ng_bootstrap__["a" /* NgbModule */], __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_7__angular_common_http__["a" /* HttpClientModule */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_8__services_file_loader_service__["a" /* FileLoaderService */], __WEBPACK_IMPORTED_MODULE_2__services_log_analysis_service__["a" /* LogAnalysisService */], __WEBPACK_IMPORTED_MODULE_3__components_color_picker__["b" /* ColorPickerService */], __WEBPACK_IMPORTED_MODULE_9__services_log_merger_service__["a" /* LogMergerService */], __WEBPACK_IMPORTED_MODULE_10__services_log_parser_service__["a" /* LogParserService */]],
+            providers: [
+                __WEBPACK_IMPORTED_MODULE_8__services_file_loader_service__["a" /* FileLoaderService */],
+                __WEBPACK_IMPORTED_MODULE_2__services_log_analysis_service__["a" /* LogAnalysisService */],
+                __WEBPACK_IMPORTED_MODULE_3__components_color_picker__["b" /* ColorPickerService */],
+                __WEBPACK_IMPORTED_MODULE_9__services_log_merger_service__["a" /* LogMergerService */],
+                __WEBPACK_IMPORTED_MODULE_10__services_log_parser_service__["a" /* LogParserService */]
+            ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_1__components_multi_selector_multi_selector_component__["a" /* MultiSelectorComponent */]]
         })
     ], SiskiyouModule);
@@ -2773,7 +2811,7 @@ var AppComponent = /** @class */ (function () {
         this.title = "app";
         this.noFiles = true;
         this.noLines = false;
-        this.colorFilter = new __WEBPACK_IMPORTED_MODULE_2__lib_model__["a" /* Filter */]("Colors", [], true);
+        this.colorFilter = new __WEBPACK_IMPORTED_MODULE_2__lib_model__["a" /* Filter */]("Color", [], true);
         logAnalysis.addFilter(this.colorFilter);
         this.logAnalysis.changed.debounceTime(400).subscribe(function () { _this.updateView(); });
     }
@@ -2792,6 +2830,9 @@ var AppComponent = /** @class */ (function () {
         }
     };
     AppComponent.prototype.updateView = function () {
+        if (this.noFiles) {
+            return;
+        }
         var m = __WEBPACK_IMPORTED_MODULE_3_moment__();
         console.log("Starting GFL");
         var el = this.filteredDisplay.nativeElement;
