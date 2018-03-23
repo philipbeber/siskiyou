@@ -1,26 +1,26 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+// import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DropdemoComponent } from "./dropdemo.component";
+// import { SelectorsComponent } from "./selectors.component";
 
-describe("DropdemoComponent", () => {
-  let component: DropdemoComponent;
-  let fixture: ComponentFixture<DropdemoComponent>;
+// describe("SelectorsComponent", () => {
+//   let component: SelectorsComponent;
+//   let fixture: ComponentFixture<SelectorsComponent>;
 
-  beforeEach(
-    async(() => {
-      TestBed.configureTestingModule({
-        declarations: [DropdemoComponent]
-      }).compileComponents();
-    })
-  );
+//   beforeEach(
+//     async(() => {
+//       TestBed.configureTestingModule({
+//         declarations: [SelectorsComponent]
+//       }).compileComponents();
+//     })
+//   );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DropdemoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(SelectorsComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it("should create", () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

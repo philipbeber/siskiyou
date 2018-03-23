@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pretty": "prettier --write src/**/*.ts",
+    "pretty": "prettier --write 'src/**/*.ts'",
     "builddocs": "ng build --bh /siskiyou/ && rimraf docs && copyfiles -u 1 dist/** docs"
   },
   "private": true,
@@ -48,7 +48,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "moment": "^2.21.0",
-    "prettier": "1.10.2",
+    "prettier": "^1.11.1",
     "protractor": "~5.1.2",
     "rimraf": "^2.6.2",
     "ts-node": "~4.1.0",

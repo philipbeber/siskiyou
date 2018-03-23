@@ -1,7 +1,19 @@
 import { LogLine, InputFile, Log } from "../model";
+import { Observable, Subject, ReplaySubject } from "rxjs/Rx";
 
 export class LogParserService {
-  public async parseFile(file: InputFile) {
+  public parseFile(file: InputFile): Observable<Log> {
+    const subject = new ReplaySubject<Log>();
+    this.parseFilePromise(file).then(log => {
+      if (log) {
+        subject.next(log);        
+      }
+      subject.complete();
+    });
+    return subject.asObservable();
+  }
+
+  private async parseFilePromise(file: InputFile) {
     let item : IteratorResult<string>;
     const reader = await file.getLines();
     const log = new Log(file.path);
