@@ -10,20 +10,24 @@ import { FileDropEvent } from "../../lib/components/file-drop";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  providers: [{provide: FileLoaderService, useClass: CustomFileLoaderService},
-    {provide: LogAnalysisService, useClass: LogAnalysisService}]
+  providers: [
+    { provide: FileLoaderService, useClass: CustomFileLoaderService },
+    { provide: LogAnalysisService, useClass: LogAnalysisService }
+  ]
 })
 export class AppComponent {
   title = "app";
   colorFilter: Filter;
   noFiles = true;
   noLines = false;
-  @ViewChild('filteredDisplay') filteredDisplay : ElementRef;
+  @ViewChild("filteredDisplay") filteredDisplay: ElementRef;
 
   constructor(private logAnalysis: LogAnalysisService) {
     this.colorFilter = new Filter("Color", [], true);
     logAnalysis.addFilter(this.colorFilter);
-    this.logAnalysis.changed.debounceTime(400).subscribe(() => { this.updateView(); });
+    this.logAnalysis.changed.debounceTime(400).subscribe(() => {
+      this.updateView();
+    });
   }
 
   public dropped(event: FileDropEvent) {
@@ -46,11 +50,11 @@ export class AppComponent {
     let m = moment();
     console.log("Starting GFL");
     const el = this.filteredDisplay.nativeElement;
-    while(el.hasChildNodes()) {
+    while (el.hasChildNodes()) {
       el.removeChild(el.firstChild);
     }
     let frag = document.createDocumentFragment();
-    let lines: string [] = [];
+    let lines: string[] = [];
     let currentColor: string = null;
     const lineObjs = this.logAnalysis.getFilteredLines();
     console.log("Got " + lineObjs.length + " lines");
@@ -66,7 +70,7 @@ export class AppComponent {
     }
     this.flush(frag, lines, currentColor);
     el.appendChild(frag);
-    console.log("GFL end: " + (moment().diff(m, "seconds", true)));
+    console.log("GFL end: " + moment().diff(m, "seconds", true));
   }
 
   private flush(frag: DocumentFragment, lines: string[], color: string) {

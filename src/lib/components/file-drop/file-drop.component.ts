@@ -1,27 +1,34 @@
-import { Component, Input, Output, EventEmitter, NgZone, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs/Rx';
-import { TimerObservable } from 'rxjs/observable/TimerObservable';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  NgZone,
+  OnDestroy
+} from "@angular/core";
+import { Subscription } from "rxjs/Rx";
+import { TimerObservable } from "rxjs/observable/TimerObservable";
 
-import { DroppedFile } from './dropped-file.model';
-import { FileDropEvent } from './file-drop-event.model';
+import { DroppedFile } from "./dropped-file.model";
+import { FileDropEvent } from "./file-drop-event.model";
 
 @Component({
-  selector: 'file-drop',
-  templateUrl: './file-drop.component.html',
-  styleUrls: ['./file-drop.component.css']
+  selector: "file-drop",
+  templateUrl: "./file-drop.component.html",
+  styleUrls: ["./file-drop.component.css"]
 })
 export class FileDropComponent implements OnDestroy {
-
   @Output()
-  public onFileDrop: EventEmitter<FileDropEvent> = new EventEmitter<FileDropEvent>();
+  public onFileDrop: EventEmitter<FileDropEvent> = new EventEmitter<
+    FileDropEvent
+  >();
 
   stack = [];
   files: DroppedFile[] = [];
   subscription: Subscription;
   dragoverflag: boolean = false;
 
-  constructor(private zone: NgZone) {
-  }
+  constructor(private zone: NgZone) {}
 
   public onDragOver(event: Event): void {
     if (!this.dragoverflag) {
@@ -37,10 +44,9 @@ export class FileDropComponent implements OnDestroy {
     this.preventAndStop(event);
   }
 
-
   dropFiles(event: any) {
     this.dragoverflag = false;
-    event.dataTransfer.dropEffect = 'copy';
+    event.dataTransfer.dropEffect = "copy";
     let length;
     if (event.dataTransfer.items) {
       length = event.dataTransfer.items.length;
@@ -67,18 +73,18 @@ export class FileDropComponent implements OnDestroy {
             name: file.name,
             resultFile: file,
             file: function(fileProcess) {
-                  fileProcess(this.resultFile);
+              fileProcess(this.resultFile);
             }
-          }
+          };
           const toUpload = new DroppedFile(entry.name, entry);
           this.addToQueue(toUpload);
         }
       } else {
         if (entry.isFile) {
-            const toUpload: DroppedFile = new DroppedFile(entry.name, entry);
-            this.addToQueue(toUpload);
+          const toUpload: DroppedFile = new DroppedFile(entry.name, entry);
+          this.addToQueue(toUpload);
         } else if (entry.isDirectory) {
-            this.traverseFileTree(entry, entry.name);
+          this.traverseFileTree(entry, entry.name);
         }
       }
     }
@@ -93,11 +99,9 @@ export class FileDropComponent implements OnDestroy {
         this.subscription.unsubscribe();
       }
     });
-
   }
 
   private traverseFileTree(item, path) {
-
     if (item.isFile) {
       const toUpload: DroppedFile = new DroppedFile(path, item);
       this.files.push(toUpload);
@@ -106,13 +110,13 @@ export class FileDropComponent implements OnDestroy {
       });
     } else {
       this.pushToStack(path);
-      path = path + '/';
+      path = path + "/";
       const dirReader = item.createReader();
       let entries = [];
       const thisObj = this;
 
-      const readEntries = function () {
-        dirReader.readEntries(function (res) {
+      const readEntries = function() {
+        dirReader.readEntries(function(res) {
           if (!res.length) {
             // add empty folders
             if (entries.length === 0) {
@@ -142,7 +146,6 @@ export class FileDropComponent implements OnDestroy {
     }
   }
 
-
   private addToQueue(item) {
     this.files.push(item);
   }
@@ -170,5 +173,3 @@ export class FileDropComponent implements OnDestroy {
     }
   }
 }
-
-

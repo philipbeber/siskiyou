@@ -6,7 +6,7 @@ export class LogParserService {
     const subject = new ReplaySubject<Log>();
     this.parseFilePromise(file).then(log => {
       if (log) {
-        subject.next(log);        
+        subject.next(log);
       }
       subject.complete();
     });
@@ -14,7 +14,7 @@ export class LogParserService {
   }
 
   private async parseFilePromise(file: InputFile) {
-    let item : IteratorResult<string>;
+    let item: IteratorResult<string>;
     const reader = await file.getLines();
     const log = new Log(file.path);
     let index = 0;

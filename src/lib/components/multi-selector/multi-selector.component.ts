@@ -1,20 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SelectableItem, SelectableDataSet } from '../../model';
+import { Component, OnInit, Input } from "@angular/core";
+import { SelectableItem, SelectableDataSet } from "../../model";
 
 @Component({
-  selector: 'multi-selector',
-  templateUrl: './multi-selector.component.html',
-  styleUrls: ['./multi-selector.component.css']
+  selector: "multi-selector",
+  templateUrl: "./multi-selector.component.html",
+  styleUrls: ["./multi-selector.component.css"]
 })
 export class MultiSelectorComponent implements OnInit {
+  @Input() public data: SelectableDataSet;
 
-  @Input()
-  public data: SelectableDataSet;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   checkClicked(event) {
     event.stopPropagation();

@@ -1,17 +1,19 @@
 import * as JSZip from "jszip";
 
 export class InputFile {
-
-  public constructor(public path: string, private file: File | JSZip.JSZipObject) {}
+  public constructor(
+    public path: string,
+    private file: File | JSZip.JSZipObject
+  ) {}
 
   public async getLines() {
-      let text: string;
-      if (this.file instanceof File) {
-        text = await this.getTextFromFile(this.file);
-      } else {
-        text = await this.file.async("text");
-      }
-      return this.readFile(text);
+    let text: string;
+    if (this.file instanceof File) {
+      text = await this.getTextFromFile(this.file);
+    } else {
+      text = await this.file.async("text");
+    }
+    return this.readFile(text);
   }
 
   private async getTextFromFile(file: File): Promise<string> {
@@ -30,20 +32,20 @@ export class InputFile {
       let curPos = 0;
       while (curPos < text.length) {
         let startPos = curPos;
-        let endPos : number;
+        let endPos: number;
         while (curPos < text.length) {
-          if (text[curPos] == '\r') {
+          if (text[curPos] == "\r") {
             endPos = curPos;
-            if ((curPos + 1) < text.length && text[curPos + 1] == '\n') {
+            if (curPos + 1 < text.length && text[curPos + 1] == "\n") {
               curPos = curPos + 2;
             } else {
               curPos = curPos + 1;
             }
             break;
           }
-          if (text[curPos] == '\n') {
+          if (text[curPos] == "\n") {
             endPos = curPos;
-            if ((curPos + 1) < text.length && text[curPos + 1] == '\r') {
+            if (curPos + 1 < text.length && text[curPos + 1] == "\r") {
               curPos = curPos + 2;
             } else {
               curPos = curPos + 1;

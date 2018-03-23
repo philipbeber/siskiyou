@@ -4,12 +4,15 @@ import { LogLineView } from "./log-line-view";
 import { Filter } from "./filter";
 
 export class FilterItem {
-
   public get cells() {
     return [this.name];
   }
 
-  public constructor(name: string, isEnabled: boolean, protected filter: Filter) {
+  public constructor(
+    name: string,
+    isEnabled: boolean,
+    protected filter: Filter
+  ) {
     this._name = name;
     this._isEnabled = isEnabled;
   }
@@ -19,7 +22,9 @@ export class FilterItem {
   }
 
   private _isEnabled: boolean;
-  public get isEnabled() { return this._isEnabled; }
+  public get isEnabled() {
+    return this._isEnabled;
+  }
   public set isEnabled(value: boolean) {
     const oldValue = this._isEnabled;
     this._isEnabled = value;
@@ -29,7 +34,9 @@ export class FilterItem {
   }
 
   private _name: string;
-  public get name() { return this._name; }
+  public get name() {
+    return this._name;
+  }
   public set name(value: string) {
     const oldValue = this._name;
     this._name = value;

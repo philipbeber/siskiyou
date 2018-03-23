@@ -5,12 +5,15 @@ import { LogLineView } from "./log-line-view";
 import { FilterItem } from "./filter-item";
 
 export class Filter {
-
   private changedSubject: Subject<void> = new Subject();
   public changed: Observable<void> = this.changedSubject.asObservable();
-  public headers: Array<string> = [ "" ];
+  public headers: Array<string> = [""];
 
-  public constructor(public title: string, public items: FilterItem[], enabled: boolean) {
+  public constructor(
+    public title: string,
+    public items: FilterItem[],
+    enabled: boolean
+  ) {
     this._enabled = enabled;
   }
 
@@ -33,7 +36,9 @@ export class Filter {
   }
 
   private _enabled: boolean;
-  public get enabled() { return this._enabled; }
+  public get enabled() {
+    return this._enabled;
+  }
   public set enabled(value: boolean) {
     let oldValue = this._enabled;
     this._enabled = value;
@@ -43,7 +48,9 @@ export class Filter {
   }
 
   private _hideUnfiltered: boolean;
-  public get hideUnfiltered() { return this._hideUnfiltered; }
+  public get hideUnfiltered() {
+    return this._hideUnfiltered;
+  }
   public set hideUnfiltered(value: boolean) {
     let oldValue = this._hideUnfiltered;
     this._hideUnfiltered = value;

@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 
 import { Log, LogLine } from "../model";
 
-
 @Injectable()
 export class LogMergerService {
   public merge(logs: Log[]): LogLine[] {

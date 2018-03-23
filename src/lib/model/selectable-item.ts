@@ -3,7 +3,6 @@ import { Subject, Observable } from "rxjs";
 import { LogLineView } from "./log-line-view";
 
 export class SelectableItem {
-
   public cells: string[];
   private changedSubject: Subject<void> = new Subject();
   public changed: Observable<void> = this.changedSubject.asObservable();
@@ -18,7 +17,9 @@ export class SelectableItem {
   }
 
   private _isSelected: boolean;
-  public get isSelected() { return this._isSelected; }
+  public get isSelected() {
+    return this._isSelected;
+  }
   public set isSelected(value: boolean) {
     const oldValue = this._isSelected;
     this._isSelected = value;

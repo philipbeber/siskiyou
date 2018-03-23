@@ -7,8 +7,5 @@ import { LogAnalysisService } from "../../services/log-analysis.service";
   styleUrls: ["./selectors.component.css"]
 })
 export class SelectorsComponent {
-
-  constructor(public logAnalysis: LogAnalysisService) {
-  }
-
+  constructor(public logAnalysis: LogAnalysisService) {}
 }

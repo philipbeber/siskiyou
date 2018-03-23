@@ -1,8 +1,5 @@
 export class LogLineView {
-
-  public constructor(
-  public text: string,
-  public visible: boolean) {}
+  public constructor(public text: string, public visible: boolean) {}
 
   public combine(source: LogLineView) {
     if (source) {

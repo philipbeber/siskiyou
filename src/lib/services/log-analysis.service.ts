@@ -1,5 +1,12 @@
 import { Injectable, NgZone } from "@angular/core";
-import { Log, LogLine, SelectableDataSet, SelectableItem, Filter, LogLineView } from "../model";
+import {
+  Log,
+  LogLine,
+  SelectableDataSet,
+  SelectableItem,
+  Filter,
+  LogLineView
+} from "../model";
 import { Subject, Observable, Subscription } from "rxjs";
 import { FileLoaderService } from "./file-loader.service";
 import { LogMergerService } from "./log-merger.service";
@@ -7,15 +14,17 @@ import { LogParserService } from "./log-parser.service";
 
 @Injectable()
 export class LogAnalysisService {
-  constructor(private ngZone: NgZone,
-              private fileLoader: FileLoaderService,
-              private logMerger: LogMergerService,
-              private logParser: LogParserService) {
+  constructor(
+    private ngZone: NgZone,
+    private fileLoader: FileLoaderService,
+    private logMerger: LogMergerService,
+    private logParser: LogParserService
+  ) {
     this.changedSubject = new Subject();
     this.changed = this.changedSubject.asObservable();
   }
 
-  private filters : Filter[] = [];
+  private filters: Filter[] = [];
 
   public logs: Log[] = [];
   public lines: LogLine[] = [];
@@ -25,34 +34,37 @@ export class LogAnalysisService {
 
   public addFiles(files: File[]) {
     this.busy = true;
-    console.log("adding files")
+    console.log("adding files");
     this.ngZone.runOutsideAngular(() => {
       const newLogs: Log[] = [];
-      this.fileLoader.loadFiles(files)
+      this.fileLoader
+        .loadFiles(files)
         .flatMap(file => this.logParser.parseFile(file))
         .subscribe({
-        next: (log) => {
-          if (log) {
-            newLogs.push(log);
+          next: log => {
+            if (log) {
+              newLogs.push(log);
+            }
+          },
+          complete: () => {
+            this.ngZone.run(() => {
+              this.processNewLogs(newLogs);
+              this.logs = this.logs.concat(newLogs);
+              this.lines = this.logMerger.merge(this.logs);
+              this.busy = false;
+              console.log("done adding files");
+              this.changedSubject.next();
+            });
           }
-        },
-        complete: () => {
-          this.ngZone.run(() => {
-            this.processNewLogs(newLogs);
-            this.logs = this.logs.concat(newLogs);
-            this.lines = this.logMerger.merge(this.logs);
-            this.busy = false;
-            console.log("done adding files");
-            this.changedSubject.next();
-          });
-        }
-      });
+        });
     });
   }
 
   public addFilter(filter: Filter) {
     this.filters.push(filter);
-    filter.changed.subscribe(() => { this.changedSubject.next(); });
+    filter.changed.subscribe(() => {
+      this.changedSubject.next();
+    });
   }
 
   public getFilters(): ReadonlyArray<Filter> {
@@ -77,6 +89,5 @@ export class LogAnalysisService {
     return lines;
   }
 
-  private processNewLogs(logs: Log[]) {
-  }
+  private processNewLogs(logs: Log[]) {}
 }

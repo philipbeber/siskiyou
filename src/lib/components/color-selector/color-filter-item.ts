@@ -1,11 +1,21 @@
-import { FilterItem, Filter, LogLine, LogLineView, LogLineColorView } from "../../model";
+import {
+  FilterItem,
+  Filter,
+  LogLine,
+  LogLineView,
+  LogLineColorView
+} from "../../model";
 
 export class ColorFilterItem extends FilterItem {
-
   private _color: string;
 
-  public constructor(name: string, isEnabled: boolean, filter: Filter, color: string) {
-    super(name, isEnabled, filter)
+  public constructor(
+    name: string,
+    isEnabled: boolean,
+    filter: Filter,
+    color: string
+  ) {
+    super(name, isEnabled, filter);
     this._color = color;
   }
 
@@ -17,7 +27,9 @@ export class ColorFilterItem extends FilterItem {
     return false;
   }
 
-  public get color() { return this._color; }
+  public get color() {
+    return this._color;
+  }
   public set color(value: string) {
     const oldValue = this._color;
     this._color = value;

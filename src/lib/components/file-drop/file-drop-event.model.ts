@@ -1,6 +1,5 @@
-import { DroppedFile } from './dropped-file.model';
+import { DroppedFile } from "./dropped-file.model";
 
 export class FileDropEvent {
-  constructor(
-    public files: DroppedFile[]) {}
+  constructor(public files: DroppedFile[]) {}
 }
