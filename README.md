@@ -4,7 +4,7 @@
 
 An extensible log viewer.
 
-Live demo: `https://philipbeber.github.io/siskiyou/`.
+Live demo: [https://philipbeber.github.io/siskiyou/].
 
 ## Extensibility points
 
@@ -18,7 +18,7 @@ Turns a file object into lines of text. The default implementation opens File or
 
 ### LogParserService
 
-Accepts an InputFile object and outputs zero or one Log objects. A Log object is mostly just a list of LogLine objects. The default implementation simply creates one LogLine for each line of text.
+Accepts an InputFile object and outputs zero or more Log objects (usually one). A Log object is mostly just a list of LogLine objects. The default implementation simply creates one LogLine for each line of text.
 
 ### LogMergerService
 
