@@ -1,5 +1,5 @@
 <div *ngFor="let filter of logAnalysis.getFilters()" ngbDropdown class="d-inline-block" [autoClose]="false">
-  <button class="btn btn-outline-primary" id="colorSelector" ngbDropdownToggle>{{filter.title}}</button>
+  <button class="btn btn-outline-primary" id="colorSelector" ngbDropdownToggle>{{filter.name}}</button>
   <div ngbDropdownMenu aria-labelledby="colorSelector">
     <color-selector [filter]="filter"></color-selector>
   </div>

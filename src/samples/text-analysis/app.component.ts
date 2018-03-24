@@ -5,6 +5,7 @@ import * as moment from "moment";
 import { CustomFileLoaderService } from "./custom-file-loader";
 import { FileLoaderService } from "../../lib/services/file-loader.service";
 import { FileDropEvent } from "../../lib/components/file-drop";
+import { SettingsStorageService } from "../../lib/services/settings-storage.service";
 
 @Component({
   selector: "app-root",
@@ -22,8 +23,11 @@ export class AppComponent {
   noLines = false;
   @ViewChild("filteredDisplay") filteredDisplay: ElementRef;
 
-  constructor(private logAnalysis: LogAnalysisService) {
-    this.colorFilter = new Filter("Color", [], true);
+  constructor(
+    private logAnalysis: LogAnalysisService,
+    settings: SettingsStorageService
+  ) {
+    this.colorFilter = settings.createFilter("Color");
     logAnalysis.addFilter(this.colorFilter);
     this.logAnalysis.changed.debounceTime(400).subscribe(() => {
       this.updateView();

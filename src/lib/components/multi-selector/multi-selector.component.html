@@ -1,5 +1,5 @@
 <div *ngIf="data" ngbDropdown class="d-inline-block">
-  <button class="btn btn-outline-primary" id="multiSelector" ngbDropdownToggle>{{data.title}}</button>
+  <button class="btn btn-outline-primary" id="multiSelector" ngbDropdownToggle>{{data.name}}</button>
   <div ngbDropdownMenu aria-labelledby="multiSelector">
     <input type="checkbox" (click)="checkClicked($event)" [(ngModel)]="data.enabled"> enabled
     <table *ngIf="data.headers && data.enabled">

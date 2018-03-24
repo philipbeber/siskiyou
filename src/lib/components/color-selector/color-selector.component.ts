@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FilterItem, Filter } from "../../model";
+import { FilterItem, Filter, ColorFilterItem } from "../../model";
 import { ColorPickerService } from "../color-picker";
-import { ColorFilterItem } from "./color-filter-item";
 
 @Component({
   selector: "color-selector",
@@ -76,7 +75,7 @@ export class ColorSelectorComponent implements OnInit {
   onlyClicked(event, clickedItem: FilterItem) {
     event.stopPropagation();
     for (let item of this.filter.items) {
-      item.isEnabled = item === clickedItem;
+      item.enabled = item === clickedItem;
     }
   }
 
@@ -88,14 +87,14 @@ export class ColorSelectorComponent implements OnInit {
   selectAll(event) {
     event.stopPropagation();
     for (let item of this.filter.items) {
-      item.isEnabled = true;
+      item.enabled = true;
     }
   }
 
   selectNone(event) {
     event.stopPropagation();
     for (let item of this.filter.items) {
-      item.isEnabled = false;
+      item.enabled = false;
     }
   }
 

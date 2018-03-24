@@ -8,13 +8,14 @@ export class Filter {
   private changedSubject: Subject<void> = new Subject();
   public changed: Observable<void> = this.changedSubject.asObservable();
   public headers: Array<string> = [""];
+  private _items: FilterItem[] = [];
 
-  public constructor(
-    public title: string,
-    public items: FilterItem[],
-    enabled: boolean
-  ) {
+  public constructor(public name: string, enabled: boolean) {
     this._enabled = enabled;
+  }
+
+  public get items(): ReadonlyArray<FilterItem> {
+    return this._items;
   }
 
   public updateView(view: LogLineView, line: LogLine) {
@@ -23,7 +24,7 @@ export class Filter {
     }
 
     var matchedOne = false;
-    for (let item of this.items) {
+    for (let item of this._items) {
       matchedOne = item.updateView(view, line) || matchedOne;
       if (!view.visible) {
         return;
@@ -64,15 +65,15 @@ export class Filter {
   }
 
   public deleteItem(item: FilterItem) {
-    const index = this.items.findIndex(x => x === item);
+    const index = this._items.findIndex(x => x === item);
     if (index >= 0) {
-      this.items.splice(index, 1);
+      this._items.splice(index, 1);
       this.notifyChanged();
     }
   }
 
   public addItem(item: FilterItem) {
-    this.items.push(item);
+    this._items.push(item);
     this.notifyChanged();
   }
 }

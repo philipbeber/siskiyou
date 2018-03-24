@@ -5,7 +5,7 @@ import { Filter } from "./filter";
 
 export class FilterItem {
   public get cells() {
-    return [this.name];
+    return [this.text];
   }
 
   public constructor(
@@ -13,33 +13,33 @@ export class FilterItem {
     isEnabled: boolean,
     protected filter: Filter
   ) {
-    this._name = name;
-    this._isEnabled = isEnabled;
+    this._text = name;
+    this._enabled = isEnabled;
   }
 
   public updateView(view: LogLineView, line: LogLine) {
     return false;
   }
 
-  private _isEnabled: boolean;
-  public get isEnabled() {
-    return this._isEnabled;
+  private _enabled: boolean;
+  public get enabled() {
+    return this._enabled;
   }
-  public set isEnabled(value: boolean) {
-    const oldValue = this._isEnabled;
-    this._isEnabled = value;
+  public set enabled(value: boolean) {
+    const oldValue = this._enabled;
+    this._enabled = value;
     if (value != oldValue) {
       this.filter.notifyChanged();
     }
   }
 
-  private _name: string;
-  public get name() {
-    return this._name;
+  private _text: string;
+  public get text() {
+    return this._text;
   }
-  public set name(value: string) {
-    const oldValue = this._name;
-    this._name = value;
+  public set text(value: string) {
+    const oldValue = this._text;
+    this._text = value;
     if (value != oldValue) {
       this.filter.notifyChanged();
     }

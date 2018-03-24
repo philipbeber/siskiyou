@@ -12,6 +12,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FileLoaderService } from "./services/file-loader.service";
 import { LogMergerService } from "./services/log-merger.service";
 import { LogParserService } from "./services/log-parser.service";
+import { SettingsStorageService } from "./services/settings-storage.service";
 
 @NgModule({
   declarations: [MultiSelectorComponent, ColorPickerDirective],
@@ -22,7 +23,8 @@ import { LogParserService } from "./services/log-parser.service";
     LogAnalysisService,
     ColorPickerService,
     LogMergerService,
-    LogParserService
+    LogParserService,
+    SettingsStorageService
   ],
   bootstrap: [MultiSelectorComponent]
 })

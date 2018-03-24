@@ -6,3 +6,4 @@ export * from "./input-file";
 export * from "./filter";
 export * from "./filter-item";
 export * from "./log-line-view";
+export * from "./color-filter-item";

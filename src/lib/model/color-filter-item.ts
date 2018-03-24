@@ -1,10 +1,7 @@
-import {
-  FilterItem,
-  Filter,
-  LogLine,
-  LogLineView,
-  LogLineColorView
-} from "../../model";
+import { FilterItem } from "./filter-item";
+import { Filter } from "./filter";
+import { LogLineView, LogLineColorView } from "./log-line-view";
+import { LogLine } from "./log-line";
 
 export class ColorFilterItem extends FilterItem {
   private _color: string;
@@ -20,7 +17,7 @@ export class ColorFilterItem extends FilterItem {
   }
 
   public updateView(view: LogLineView, line: LogLine) {
-    if (this.isEnabled && line.text.indexOf(this.name) >= 0) {
+    if (this.enabled && line.text.indexOf(this.text) >= 0) {
       (view as LogLineColorView).color = this.color;
       return true;
     }
