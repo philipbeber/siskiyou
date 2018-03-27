@@ -52,7 +52,7 @@ export class LogAnalysisService {
               this.logs = this.logs.concat(newLogs);
               this.lines = this.logMerger.merge(this.logs);
               this.busy = false;
-              console.log("done adding files");
+              console.log("done adding files. now have " + this.lines.length + " lines");
               this.changedSubject.next();
             });
           }

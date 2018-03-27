@@ -23,10 +23,10 @@
     <tbody>
       <tr *ngFor="let item of filter.items">
         <td class="sa-column">
-          <input type="checkbox" [(ngModel)]="item.isEnabled">
+          <input type="checkbox" [(ngModel)]="item.enabled">
         </td>
         <td>
-          <input class="text-input" type="text" [(ngModel)]="item.name">
+          <input class="text-input" type="text" [(ngModel)]="item.text">
         </td>
         <td>
           <input class="color-input" [(colorPicker)]="item.color" [style.background]="item.color" [value]="item.color"/>

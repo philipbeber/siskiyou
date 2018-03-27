@@ -8,11 +8,11 @@ export class ColorFilterItem extends FilterItem {
 
   public constructor(
     name: string,
-    isEnabled: boolean,
+    enabled: boolean,
     filter: Filter,
     color: string
   ) {
-    super(name, isEnabled, filter);
+    super(name, enabled, filter);
     this._color = color;
   }
 

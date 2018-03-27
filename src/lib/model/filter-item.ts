@@ -10,11 +10,11 @@ export class FilterItem {
 
   public constructor(
     name: string,
-    isEnabled: boolean,
+    enabled: boolean,
     protected filter: Filter
   ) {
     this._text = name;
-    this._enabled = isEnabled;
+    this._enabled = enabled;
   }
 
   public updateView(view: LogLineView, line: LogLine) {

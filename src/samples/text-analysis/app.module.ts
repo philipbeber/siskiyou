@@ -10,7 +10,8 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import {
   ColorSelectorComponent,
   FileDropComponent,
-  SelectorsComponent
+  SelectorsComponent,
+  FilteredViewComponent
 } from "../../lib/components";
 import { SiskiyouModule } from "../../lib/siskiyou.module";
 
@@ -19,7 +20,8 @@ import { SiskiyouModule } from "../../lib/siskiyou.module";
     AppComponent,
     ColorSelectorComponent,
     FileDropComponent,
-    SelectorsComponent
+    SelectorsComponent,
+    FilteredViewComponent
   ],
   imports: [
     NgbModule.forRoot(),

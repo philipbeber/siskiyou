@@ -21,7 +21,7 @@
     </table>
     <div *ngIf="!data.headers && data.enabled">
       <div *ngFor="let item of data.items" class="selectable-item"><input type="checkbox"
-        (click)="checkClicked($event)" [(ngModel)]="item.isSelected"> {{item.name}}
+        (click)="checkClicked($event)" [(ngModel)]="item.isSelected"> {{item.text}}
         <a href="#" (click)="onlyClicked(item)">only</a>
       </div>
     </div>

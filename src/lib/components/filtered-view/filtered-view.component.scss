@@ -1,0 +1,13 @@
+.siskiyou-filtered-view {
+  overflow: scroll;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  
+  pre {
+    margin: 0 5px;
+    font-size: 10px;
+    line-height: 1.5;
+    overflow: visible;
+  }
+}

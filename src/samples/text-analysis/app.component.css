@@ -19,7 +19,6 @@
 
 .filtered-display {
   flex: 1 1 auto;
-  overflow: scroll;
 }
 
 .no-files {
