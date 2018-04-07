@@ -52,7 +52,7 @@ export class LogAnalysisService {
               this.logs = this.logs.concat(newLogs);
               this.lines = this.logMerger.merge(this.logs);
               this.busy = false;
-              console.log("done adding files. now have " + this.lines.length + " lines");
+              //console.log("done adding files. now have " + this.lines.length + " lines");
               this.changedSubject.next();
             });
           }
@@ -82,9 +82,7 @@ export class LogAnalysisService {
         }
       }
 
-      if (view.visible) {
-        lines.push(view);
-      }
+      lines.push(view);
     }
     return lines;
   }

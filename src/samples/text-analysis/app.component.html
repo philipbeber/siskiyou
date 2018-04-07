@@ -1,4 +1,4 @@
-<file-drop class="file-drop" (onFileDrop)="dropped($event)">
+<file-drop (window:keydown)="keyDown($event)" class="file-drop" (onFileDrop)="dropped($event)">
   <div class="main-area">
     <div class="container-fluid selectors">
       <div class="row">

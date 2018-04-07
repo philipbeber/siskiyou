@@ -5,7 +5,6 @@ import { FileLoaderService } from "./file-loader.service";
 import { InputFile, Log } from "../model";
 import { LogMergerService } from "./log-merger.service";
 import { LogParserService } from "./log-parser.service";
-//import { ErrorObservable } from "rxjs/observable/ErrorObservable";
 import { Observable, Subject, ReplaySubject } from "rxjs/Rx";
 
 describe("LogAnalysisService", () => {

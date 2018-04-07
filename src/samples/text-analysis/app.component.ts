@@ -41,4 +41,11 @@ export class AppComponent {
       });
     }
   }
+
+  public keyDown(event: KeyboardEvent) {
+    console.log(event.code + "/" + event.ctrlKey);
+    if (event.code == "KeyH" && event.ctrlKey) {
+      this.colorFilter.hideUnfiltered = !this.colorFilter.hideUnfiltered;
+    }
+  }
 }
