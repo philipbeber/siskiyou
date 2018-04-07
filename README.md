@@ -4,7 +4,7 @@
 
 An extensible log viewer.
 
-Live demo: <https://philipbeber.github.io/siskiyou>.
+Live demo: <https://philipbeber.github.io/siskiyou/demo>.
 
 ## Extensibility points
 

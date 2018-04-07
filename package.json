@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "pretty": "prettier --write 'src/**/*.ts'",
-    "builddocs": "ng build --bh /siskiyou/ && rimraf docs && copyfiles -u 1 dist/** docs"
+    "builddocs": "ng build --bh /siskiyou/demo/ && rimraf demo && copyfiles -u 1 dist/** demo"
   },
   "private": true,
   "dependencies": {
