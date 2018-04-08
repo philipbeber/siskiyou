@@ -11,9 +11,16 @@ before_script:
   - npm install
 
 script:
-  - ng build --prod --aot false
+  - ng build --bh /siskiyou/demo/ -op demo
 
 notifications:
   email:
     on_failure: change
     on_success: change
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: master
