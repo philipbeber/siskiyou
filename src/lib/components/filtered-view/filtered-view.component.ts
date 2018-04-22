@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy, Input, ViewChildren, QueryList } from '@angular/core';
 import { LogAnalysisService } from '../../services/log-analysis.service';
 import { Subscription } from 'rxjs';
-import * as moment from "moment";
+import * as momentNs from 'moment';
+const moment = momentNs;
 import { LogLineColorView, LogLine, LogLineView } from '../../model';
 import { Observable } from 'rxjs';
 
@@ -72,7 +73,7 @@ export class FilteredViewComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  lineClick(line: ChunkLine) {
+  private lineClick(line: ChunkLine) {
     if (line === this.selectedLine) {
       return;
     }

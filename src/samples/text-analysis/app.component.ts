@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
 import { LogAnalysisService } from "../../lib/services/log-analysis.service";
 import { Filter, LogLineColorView } from "../../lib/model";
-import * as moment from "moment";
+import * as momentNs from 'moment';
+const moment = momentNs;
 import { CustomFileLoaderService } from "./custom-file-loader";
 import { FileLoaderService } from "../../lib/services/file-loader.service";
 import { FileDropEvent } from "../../lib/components/file-drop";
