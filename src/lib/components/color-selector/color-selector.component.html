@@ -29,7 +29,7 @@
           <input class="text-input" type="text" [(ngModel)]="item.text">
         </td>
         <td>
-          <input class="color-input" [(colorPicker)]="item.color" [style.background]="item.color" [value]="item.color"/>
+          <input class="color-input" [style.background]="item.color" [value]="item.color"/>
         </td>
         <td>
           <a href="#" (click)="onlyClicked($event, item)">only</a>
@@ -44,7 +44,7 @@
           <input class="text-input" type="text" [(ngModel)]="newText" placeholder="New...">
         </td>
         <td>
-          <input [hidden]="!newText" class="color-input" [(colorPicker)]="newColor" [style.background]="newColor" [value]="newColor" cpPosition="bottom"/>
+          <input [hidden]="!newText" class="color-input" [style.background]="newColor" [value]="newColor" cpPosition="bottom"/>
         </td>
         <td>
           <a [hidden]="!newText" href="#" (click)="createClicked($event)">create</a>
