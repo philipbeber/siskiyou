@@ -1,12 +1,9 @@
 import { Component, ViewChild, ElementRef } from "@angular/core";
-import { LogAnalysisService } from "../../lib/services/log-analysis.service";
-import { Filter, LogLineColorView } from "../../lib/model";
+import { LogAnalysisService, FileLoaderService, FileDropEvent, SettingsStorageService } from "siskiyou";
+import { Filter, LogLineColorView } from "siskiyou";
 import * as momentNs from 'moment';
 const moment = momentNs;
 import { CustomFileLoaderService } from "./custom-file-loader";
-import { FileLoaderService } from "../../lib/services/file-loader.service";
-import { FileDropEvent } from "../../lib/components/file-drop";
-import { SettingsStorageService } from "../../lib/services/settings-storage.service";
 
 @Component({
   selector: "app-root",

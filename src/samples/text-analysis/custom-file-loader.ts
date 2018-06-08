@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 
-import { InputFile } from "../../lib/model";
-import { FileLoaderService } from "../../lib/services/file-loader.service";
+import { InputFile } from "siskiyou";
+import { FileLoaderService } from "siskiyou";
 
 @Injectable()
 export class CustomFileLoaderService extends FileLoaderService {

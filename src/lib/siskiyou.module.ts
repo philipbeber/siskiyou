@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { MultiSelectorComponent } from "./components/multi-selector/multi-selector.component";
+import { SelectorsComponent, ColorSelectorComponent, FilteredViewComponent, FileDropComponent } from "./components";
 import { LogAnalysisService } from "./services/log-analysis.service";
 import { FormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
@@ -9,10 +9,11 @@ import { FileLoaderService } from "./services/file-loader.service";
 import { LogMergerService } from "./services/log-merger.service";
 import { LogParserService } from "./services/log-parser.service";
 import { SettingsStorageService } from "./services/settings-storage.service";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
-  declarations: [MultiSelectorComponent],
-  exports: [MultiSelectorComponent],
+  declarations: [SelectorsComponent, ColorSelectorComponent, FilteredViewComponent, FileDropComponent],
+  exports: [SelectorsComponent, ColorSelectorComponent, FilteredViewComponent, FileDropComponent],
   imports: [NgbModule, BrowserModule, FormsModule, HttpClientModule],
   providers: [
     FileLoaderService,
@@ -20,7 +21,6 @@ import { SettingsStorageService } from "./services/settings-storage.service";
     LogMergerService,
     LogParserService,
     SettingsStorageService
-  ],
-  bootstrap: [MultiSelectorComponent]
+  ]
 })
 export class SiskiyouModule {}

@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "pretty": "prettier --write 'src/**/*.ts'",
     "builddocs": "ng build --bh /siskiyou/demo/ && rimraf demo && copyfiles -u 1 dist/** demo",
-    "build:pkg": "ng-packagr -p ng-package.json"
+    "build:pkg": "ng-packagr -p ng-package.json",
+    "build:lib": "ng-packagr -p src/lib/package.json"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +34,7 @@
   },
   "devDependencies": {
     "@angular/cli": "^1.7.3",
-    "@angular/compiler": "^5.2.9",
+    "@angular/compiler": "^5.2.10",
     "@angular/compiler-cli": "^5.2.9",
     "@angular/language-service": "^5.2.9",
     "@types/jasmine": "~2.8.3",
@@ -49,11 +50,13 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "moment": "^2.21.0",
-    "ng-packagr": "^2.4.2",
+    "ng-packagr": "^2.4.5",
     "prettier": "^1.11.1",
     "protractor": "~5.1.2",
     "rimraf": "^2.6.2",
     "ts-node": "~4.1.0",
+    "tsickle": "^0.27.5",
+    "tslib": "^1.9.0",
     "tslint": "~5.9.1",
     "typescript": "~2.5.3"
   }

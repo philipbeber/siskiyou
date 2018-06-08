@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.packaged.json",
   "compilerOptions": {
     "outDir": "../dist/apps/text-analysis",
     "module": "es2015"

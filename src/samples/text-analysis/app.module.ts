@@ -11,17 +11,18 @@ import {
   ColorSelectorComponent,
   FileDropComponent,
   SelectorsComponent,
-  FilteredViewComponent
-} from "../../lib/components";
-import { SiskiyouModule } from "../../lib/siskiyou.module";
+  FilteredViewComponent,
+  SiskiyouModule,
+  FileLoaderService,
+  LogAnalysisService,
+  LogMergerService,
+  LogParserService,
+  SettingsStorageService
+} from "siskiyou";
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ColorSelectorComponent,
-    FileDropComponent,
-    SelectorsComponent,
-    FilteredViewComponent
+    AppComponent
   ],
   imports: [
     NgbModule.forRoot(),

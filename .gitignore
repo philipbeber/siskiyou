@@ -5,6 +5,9 @@
 /dist-server
 /tmp
 /out-tsc
+.ng_pkg_build/
+siskiyou.tgz
+/siskiyou/
 
 # dependencies
 /node_modules

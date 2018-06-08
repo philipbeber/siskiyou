@@ -5,8 +5,9 @@
   },
   "apps": [
     {
+      "name": "text-analysis",
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist/apps/text-analysis",
       "assets": [
         "assets",
         "favicon.ico"
@@ -16,6 +17,31 @@
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "text-analysis-packaged",
+      "root": "src",
+      "outDir": "dist/apps/text-analysis",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.packaged.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [

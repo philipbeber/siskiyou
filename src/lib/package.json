@@ -1,0 +1,36 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "siskiyou",
+  "version": "0.0.1",
+  "lib": {
+    "entryFile": "public_api.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philipbeber/siskiyou"
+  },
+  "author": {
+    "name": "Philip Beber",
+    "email": "philip.beber@gmail.com"
+  },
+  "keywords": [
+    "logging"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/philipbeber/siskiyou/issues"
+  },
+  "peerDependencies": {
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0",
+    "@types/jszip": "^3.1.3"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../siskiyou"
+  }
+}
