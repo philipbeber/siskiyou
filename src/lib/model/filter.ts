@@ -1,4 +1,3 @@
-import { SelectableItem } from "./selectable-item";
 import { LogLine } from "./log-line";
 import { Subject, Observable } from "rxjs";
 import { LogLineView } from "./log-line-view";
@@ -10,12 +9,16 @@ export class Filter {
   public headers: Array<string> = [""];
   private _items: FilterItem[] = [];
 
-  public constructor(public name: string, enabled: boolean) {
-    this._enabled = enabled;
+  public constructor(public name: string) {
+    this._enabled = true;
   }
 
   public get items(): ReadonlyArray<FilterItem> {
     return this._items;
+  }
+
+  public get type() {
+    return "base";
   }
 
   public updateView(view: LogLineView, line: LogLine) {
@@ -25,7 +28,7 @@ export class Filter {
 
     var matchedOne = false;
     for (let item of this._items) {
-      matchedOne = item.updateView(view, line) || matchedOne;
+      matchedOne = this.updateViewForItem(item, view, line) || matchedOne;
       if (!view.visible) {
         return;
       }
@@ -34,6 +37,10 @@ export class Filter {
     if (!matchedOne && this.hideUnfiltered) {
       view.visible = false;
     }
+  }
+
+  public updateViewForItem(item: FilterItem, view: LogLineView, line: LogLine) {
+    return false;
   }
 
   private _enabled: boolean;

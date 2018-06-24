@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { FilterItem, Filter, ColorFilterItem } from "../../model";
+import { FilterItem, Filter, ColorFilter } from "../../model";
 import { ColorPickerService } from "../color-picker";
 
 @Component({
@@ -100,13 +100,11 @@ export class ColorSelectorComponent implements OnInit {
 
   createClicked(event) {
     event.stopPropagation();
-    const newItem = new ColorFilterItem(
+    (this.filter as ColorFilter).addColorItem(
       this.newText,
       true,
-      this.filter,
       this.newColor
     );
-    this.filter.addItem(newItem);
     this.newText = null;
     this.setRandomColor();
   }

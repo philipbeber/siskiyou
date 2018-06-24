@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
-import { SelectorsComponent, ColorSelectorComponent, FilteredViewComponent, FileDropComponent } from "./components";
+import { SelectorsComponent, ColorSelectorComponent, FilteredViewComponent,
+  FileDropComponent, TextSelectorComponent } from "./components";
 import { LogAnalysisService } from "./services/log-analysis.service";
 import {
   ColorPickerService,
@@ -16,8 +17,22 @@ import { SettingsStorageService } from "./services/settings-storage.service";
 import { CommonModule } from "@angular/common";
 
 @NgModule({
-  declarations: [SelectorsComponent, ColorSelectorComponent, FilteredViewComponent, FileDropComponent, ColorPickerDirective],
-  exports: [SelectorsComponent, ColorSelectorComponent, FilteredViewComponent, FileDropComponent, ColorPickerDirective],
+  declarations: [
+    SelectorsComponent,
+    ColorSelectorComponent,
+    TextSelectorComponent,
+    FilteredViewComponent,
+    FileDropComponent,
+    ColorPickerDirective
+  ],
+  exports: [
+    SelectorsComponent,
+    ColorSelectorComponent,
+    TextSelectorComponent,
+    FilteredViewComponent,
+    FileDropComponent,
+    ColorPickerDirective
+  ],
   imports: [NgbModule, BrowserModule, FormsModule, HttpClientModule],
   providers: [
     FileLoaderService,

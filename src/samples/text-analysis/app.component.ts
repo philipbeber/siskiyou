@@ -1,8 +1,6 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component } from "@angular/core";
 import { LogAnalysisService, FileLoaderService, FileDropEvent, SettingsStorageService } from "siskiyou";
-import { Filter, LogLineColorView } from "siskiyou";
-import * as momentNs from 'moment';
-const moment = momentNs;
+import { Filter, ColorFilter, HideFilter } from "siskiyou";
 import { CustomFileLoaderService } from "./custom-file-loader";
 
 @Component({
@@ -17,14 +15,17 @@ import { CustomFileLoaderService } from "./custom-file-loader";
 export class AppComponent {
   title = "app";
   colorFilter: Filter;
+  hideFilter: Filter;
   noFiles = true;
 
   constructor(
     private logAnalysis: LogAnalysisService,
     settings: SettingsStorageService
   ) {
-    this.colorFilter = settings.createFilter("Color");
+    this.colorFilter = settings.restoreFilter(new ColorFilter("Color"));
     logAnalysis.addFilter(this.colorFilter);
+    this.hideFilter = settings.restoreFilter(new HideFilter("Hide"));
+    logAnalysis.addFilter(this.hideFilter);
   }
 
   public dropped(event: FileDropEvent) {

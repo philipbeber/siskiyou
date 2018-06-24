@@ -1,26 +1,23 @@
 import { Injectable } from "@angular/core";
-import { Filter, ColorFilterItem, FilterItem } from "../model";
+import { Filter, FilterItem } from "../model";
 
 @Injectable()
 export class SettingsStorageService {
+  serializerVersion = 2;
   constructor() {}
 
-  public createFilter(name: string) {
-    const storageName = "Filter|" + name;
+  public restoreFilter(filter: Filter) {
+    const storageName = "Filter|" + filter.name;
     const item = localStorage.getItem(storageName);
-    let filter: Filter;
     if (item) {
       try {
-        const serializedForm = JSON.parse(item) as SerializedFilter;
-        filter = this.deserializeFilter(serializedForm);
+        const serializedForm = JSON.parse(item) as SerializedFilter;        
+        this.deserializeFilter(filter, serializedForm);
       } catch (err) {
         console.error(
           "Error deserializing filter: " + err + ". String: " + item
         );
       }
-    }
-    if (!filter) {
-      filter = new Filter(name, true);
     }
 
     filter.changed.subscribe(() => {
@@ -33,26 +30,14 @@ export class SettingsStorageService {
     return filter;
   }
 
-  private deserializeFilter(serializedFilter: SerializedFilter) {
-    const filter = new Filter(serializedFilter.name, serializedFilter.enabled);
+  private deserializeFilter(filter: Filter, serializedFilter: SerializedFilter) {
+    if (serializedFilter.version != this.serializerVersion) {
+      return;
+    }
+    filter.enabled = serializedFilter.enabled;
     filter.hideUnfiltered = serializedFilter.hideUnfiltered;
     for (let serializedItem of serializedFilter.items) {
-      let item: FilterItem;
-      if (serializedItem.type == "ColorFilterItem") {
-        item = new ColorFilterItem(
-          serializedItem.text,
-          serializedItem.enabled,
-          filter,
-          serializedItem.color
-        );
-      } else {
-        item = new FilterItem(
-          serializedItem.text,
-          serializedItem.enabled,
-          filter
-        );
-      }
-      filter.addItem(item);
+      filter.addItem(new FilterItem(serializedItem.text, serializedItem.enabled, filter, serializedItem.fields));
     }
     return filter;
   }
@@ -60,20 +45,17 @@ export class SettingsStorageService {
   private serializeFilter(filter: Filter) {
     var serializedItems: SerializedFilterItem[] = [];
     for (let item of filter.items) {
-      const type =
-        item instanceof ColorFilterItem ? "ColorFilterItem" : "FilterItem";
-      const color = item instanceof ColorFilterItem ? item.color : undefined;
       serializedItems.push({
-        type: type,
-        version: 1,
+        type: "FilterItem",
+        version: this.serializerVersion,
         text: item.text,
         enabled: item.enabled,
-        color: color
+        fields: item.getAllFields()
       });
     }
     return {
       type: "Filter",
-      version: 1,
+      version: this.serializerVersion,
       name: filter.name,
       enabled: filter.enabled,
       hideUnfiltered: filter.hideUnfiltered,
@@ -97,5 +79,5 @@ class SerializedFilter extends SerializedObject {
 class SerializedFilterItem extends SerializedObject {
   public text: string;
   public enabled: boolean;
-  public color: string;
+  public fields: any;
 }

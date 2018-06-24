@@ -1,5 +1,4 @@
 import { LogLine } from "./log-line";
-import { Subject, Observable } from "rxjs";
 import { LogLineView } from "./log-line-view";
 import { Filter } from "./filter";
 
@@ -11,14 +10,12 @@ export class FilterItem {
   public constructor(
     name: string,
     enabled: boolean,
-    protected filter: Filter
+    protected filter: Filter,
+    fields: any = {}
   ) {
     this._text = name;
     this._enabled = enabled;
-  }
-
-  public updateView(view: LogLineView, line: LogLine) {
-    return false;
+    this._extra = fields;
   }
 
   private _enabled: boolean;
@@ -43,6 +40,20 @@ export class FilterItem {
     if (value != oldValue) {
       this.filter.notifyChanged();
     }
+  }
+
+  private _extra: any;
+  public setField(name: string, value: string) {
+    if (value != this._extra[name]) {
+      this._extra[name] = value;
+      this.filter.notifyChanged();
+    }
+  }
+  public getField(name: string) {
+    return this._extra[name];
+  }
+  public getAllFields() {
+    return this._extra;
   }
 
   public delete() {
