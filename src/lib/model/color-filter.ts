@@ -1,7 +1,7 @@
 import { Filter } from "./filter";
 import { FilterItem } from "./filter-item";
 import { LogLineView, LogLineColorView } from "./log-line-view";
-import { LogLine } from "siskiyou/model";
+import { LogLine } from "./log-line";
 
 export class ColorFilter extends Filter {
 
