@@ -29,7 +29,9 @@
           <input class="text-input" type="text" [(ngModel)]="item.text">
         </td>
         <td>
-          <input class="color-input" [(colorPicker)]="item.color" [style.background]="item.color" [value]="item.color"/>
+          <input class="color-input" [colorPicker]="item.getField('color')"
+           [style.background]="item.getField('color')" [value]="item.getField('color')"
+           (colorPickerChange)="item.setField('color', $event)"/>
         </td>
         <td>
           <a href="#" (click)="onlyClicked($event, item)">only</a>

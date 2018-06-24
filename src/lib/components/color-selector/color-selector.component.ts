@@ -14,10 +14,10 @@ export class ColorSelectorComponent implements OnInit {
   private newColor: string;
 
   constructor(private cpService: ColorPickerService) {
-    this.setRandomColor();
+    this.newColor = ColorSelectorComponent.createRainbowColor();
   }
 
-  private setRandomColor() {
+  public static createRainbowColor() {
     var r, g, b;
     var h = Math.random();
     var i = ~~(h * 6);
@@ -55,9 +55,8 @@ export class ColorSelectorComponent implements OnInit {
         b = q;
         break;
     }
-    // rgba(255,137,0,0.47)
-    this.newColor =
-      "rgba(" +
+
+    return "rgba(" +
       (~~(r * 255)).toFixed() +
       "," +
       (~~(g * 255)).toFixed() +
@@ -106,6 +105,6 @@ export class ColorSelectorComponent implements OnInit {
       this.newColor
     );
     this.newText = null;
-    this.setRandomColor();
+    this.newColor = ColorSelectorComponent.createRainbowColor();
   }
 }

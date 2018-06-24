@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { LogAnalysisService, FileLoaderService, FileDropEvent, SettingsStorageService } from "siskiyou";
+import { LogAnalysisService, FileLoaderService, FileDropEvent, SettingsStorageService, ColorSelectorComponent } from "siskiyou";
 import { Filter, ColorFilter, HideFilter } from "siskiyou";
 import { CustomFileLoaderService } from "./custom-file-loader";
 
@@ -14,7 +14,7 @@ import { CustomFileLoaderService } from "./custom-file-loader";
 })
 export class AppComponent {
   title = "app";
-  colorFilter: Filter;
+  colorFilter: ColorFilter;
   hideFilter: Filter;
   noFiles = true;
 
@@ -22,7 +22,8 @@ export class AppComponent {
     private logAnalysis: LogAnalysisService,
     settings: SettingsStorageService
   ) {
-    this.colorFilter = settings.restoreFilter(new ColorFilter("Color"));
+    this.colorFilter = new ColorFilter("Color");
+    settings.restoreFilter(this.colorFilter);
     logAnalysis.addFilter(this.colorFilter);
     this.hideFilter = settings.restoreFilter(new HideFilter("Hide"));
     logAnalysis.addFilter(this.hideFilter);
@@ -42,9 +43,17 @@ export class AppComponent {
   }
 
   public keyDown(event: KeyboardEvent) {
-    console.log(event.code + "/" + event.ctrlKey);
-    if (event.code == "KeyH" && event.ctrlKey) {
-      this.colorFilter.hideUnfiltered = !this.colorFilter.hideUnfiltered;
+    if (event.ctrlKey) {
+      switch(event.code) {
+        case "KeyH":
+          this.colorFilter.hideUnfiltered = !this.colorFilter.hideUnfiltered;
+          break;
+        case "KeyN":
+          const text = window.getSelection().toString();
+          if (text) {
+            this.colorFilter.addColorItem(text, true, ColorSelectorComponent.createRainbowColor());
+          }
+      }
     }
   }
 }
