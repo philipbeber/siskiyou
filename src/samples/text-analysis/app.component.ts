@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { LogAnalysisService, FileLoaderService, FileDropEvent, SettingsStorageService, ColorSelectorComponent } from "siskiyou";
 import { Filter, ColorFilter, HideFilter } from "siskiyou";
 import { CustomFileLoaderService } from "./custom-file-loader";
+import { FileFilter } from "../../lib/model/file-filter";
 
 @Component({
   selector: "app-root",
@@ -16,6 +17,7 @@ export class AppComponent {
   title = "app";
   colorFilter: ColorFilter;
   hideFilter: Filter;
+  fileFilter: FileFilter;
   noFiles = true;
 
   constructor(
@@ -27,6 +29,9 @@ export class AppComponent {
     logAnalysis.addFilter(this.colorFilter);
     this.hideFilter = settings.restoreFilter(new HideFilter("Hide"));
     logAnalysis.addFilter(this.hideFilter);
+    this.fileFilter = new FileFilter("Files");
+    logAnalysis.addFilter(this.fileFilter);
+    logAnalysis.fileAdded.subscribe(file => this.fileFilter.addFileItem(file));
   }
 
   public dropped(event: FileDropEvent) {

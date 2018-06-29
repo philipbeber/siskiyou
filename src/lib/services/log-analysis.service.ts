@@ -2,8 +2,7 @@ import { Injectable, NgZone } from "@angular/core";
 import {
   Log,
   LogLine,
-  SelectableDataSet,
-  SelectableItem,
+  InputFile,
   Filter,
   LogLineView
 } from "../model";
@@ -31,6 +30,8 @@ export class LogAnalysisService {
   public busy: boolean;
   public changed: Observable<void>;
   private changedSubject: Subject<void>;
+  private fileAddedSubject = new Subject<InputFile>();
+  public fileAdded = this.fileAddedSubject.asObservable();
 
   public addFiles(files: File[]) {
     this.busy = true;
@@ -39,7 +40,10 @@ export class LogAnalysisService {
       const newLogs: Log[] = [];
       this.fileLoader
         .loadFiles(files)
-        .flatMap(file => this.logParser.parseFile(file))
+        .flatMap(file => {
+          this.fileAddedSubject.next(file);
+          return this.logParser.parseFile(file);
+        })
         .subscribe({
           next: log => {
             if (log) {

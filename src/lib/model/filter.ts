@@ -8,6 +8,7 @@ export class Filter {
   public changed: Observable<void> = this.changedSubject.asObservable();
   public headers: Array<string> = [""];
   private _items: FilterItem[] = [];
+  public readOnly: boolean;
 
   public constructor(public name: string) {
     this._enabled = true;

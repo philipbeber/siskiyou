@@ -2,6 +2,6 @@
   <button class="btn btn-outline-primary" id="colorSelector" ngbDropdownToggle>{{filter.name}}</button>
   <div ngbDropdownMenu aria-labelledby="colorSelector">
     <color-selector *ngIf="filter.type=='color'" [filter]="filter"></color-selector>
-    <text-selector *ngIf="filter.type=='hide'" [filter]="filter"></text-selector>
+    <text-selector *ngIf="filter.type=='hide' || filter.type=='file'" [filter]="filter"></text-selector>
   </div>
 </div>

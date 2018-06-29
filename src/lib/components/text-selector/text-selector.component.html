@@ -18,16 +18,17 @@
           <input type="checkbox" [(ngModel)]="item.enabled">
         </td>
         <td>
-          <input class="text-input" type="text" [(ngModel)]="item.text">
+          <input *ngIf="!filter.readOnly" class="text-input" type="text" [(ngModel)]="item.text">
+          <span *ngIf="filter.readOnly" class="text-input">{{item.text}}</span>
         </td>
         <td>
           <a href="#" (click)="onlyClicked($event, item)">only</a>
         </td>
-        <td>
+        <td *ngIf="!filter.readOnly">
           <a class="" href="#" (click)="deleteClicked($event, item)">delete</a>
         </td>
       </tr>
-      <tr>
+      <tr *ngIf="!filter.readOnly">
         <td class="sa-column"></td>
         <td>
           <input class="text-input" type="text" [(ngModel)]="newText" placeholder="New...">
