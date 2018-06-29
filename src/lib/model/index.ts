@@ -8,3 +8,4 @@ export * from "./filter-item";
 export * from "./log-line-view";
 export * from "./color-filter";
 export * from "./hide-filter";
+export * from "./file-filter";

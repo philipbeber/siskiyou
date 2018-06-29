@@ -1,8 +1,7 @@
 import { Component } from "@angular/core";
 import { LogAnalysisService, FileLoaderService, FileDropEvent, SettingsStorageService, ColorSelectorComponent } from "siskiyou";
-import { Filter, ColorFilter, HideFilter } from "siskiyou";
+import { Filter, ColorFilter, HideFilter, FileFilter } from "siskiyou";
 import { CustomFileLoaderService } from "./custom-file-loader";
-import { FileFilter } from "../../lib/model/file-filter";
 
 @Component({
   selector: "app-root",
