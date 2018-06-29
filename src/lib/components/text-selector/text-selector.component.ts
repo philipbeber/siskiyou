@@ -22,6 +22,7 @@ export class TextSelectorComponent implements OnInit {
 
   onlyClicked(event, clickedItem: FilterItem) {
     event.stopPropagation();
+    event.preventDefault();
     for (let item of this.filter.items) {
       item.enabled = item === clickedItem;
     }
@@ -29,11 +30,13 @@ export class TextSelectorComponent implements OnInit {
 
   deleteClicked(event, clickedItem: FilterItem) {
     event.stopPropagation();
+    event.preventDefault();
     this.filter.deleteItem(clickedItem);
   }
 
   selectAll(event) {
     event.stopPropagation();
+    event.preventDefault();
     for (let item of this.filter.items) {
       item.enabled = true;
     }
@@ -48,6 +51,7 @@ export class TextSelectorComponent implements OnInit {
 
   createClicked(event) {
     event.stopPropagation();
+    event.preventDefault();
     const newItem = new FilterItem(
       this.newText,
       true,

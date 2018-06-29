@@ -18,12 +18,16 @@ export class MultiSelectorComponent implements OnInit {
   }
 
   onlyClicked(clickedItem: SelectableItem) {
+    event.stopPropagation();
+    event.preventDefault();
     for (let item of this.data.items) {
       item.isSelected = item === clickedItem;
     }
   }
 
   selectAll() {
+    event.stopPropagation();
+    event.preventDefault();
     for (let item of this.data.items) {
       item.isSelected = true;
     }
