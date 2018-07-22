@@ -84,4 +84,15 @@ export class Filter {
     this._items.push(item);
     this.notifyChanged();
   }
+
+  public moveItem(fromIndex: number, toIndex: number) {
+    if (fromIndex < 0 || fromIndex >= this._items.length || toIndex < 0 || toIndex >= this._items.length)
+    {
+      return;
+    }
+
+    let movedItems = this._items.splice(fromIndex, 1);
+    this._items.splice(toIndex, 0, movedItems[0]);
+    this.notifyChanged();
+  }
 }

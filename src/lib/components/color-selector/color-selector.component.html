@@ -1,4 +1,4 @@
-<div *ngIf="filter" class="filter">
+<div *ngIf="filter" class="filter" (click)="selectedItem = null">
   <div class="top-options">
     <div class="enabled-option">
       <input type="checkbox" [(ngModel)]="filter.enabled"> enabled
@@ -12,18 +12,29 @@
       <col class="sa-column">
       <col class="header-column">
       <col class="color-column">
-      <col class="only-column">
-      <col class="delete-column">
+      <col class="select-column">
     </colgroup>
     <thead>
       <tr>
-        <th class="sa-column"><a href="#" (click)="selectAll($event)">all</a></th>
+        <th class="sa-column"><a href="#" (click)="enableAll($event)">all</a></th>
+        <th></th>
+        <th></th>
+        <th>
+          <div *ngIf="selectedItem">
+            <a *ngIf="!upDisabled()" href="#" (click)="moveUp($event)">up</a>
+            <span *ngIf="upDisabled()" class="disabled">up</span>
+            <a *ngIf="!downDisabled()" href="#" (click)="moveDown($event)">down</a>
+            <span *ngIf="downDisabled()" class="disabled">down</span>
+            <a href="#" (click)="deleteClicked($event)">del</a>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of filter.items">
+      <tr *ngFor="let item of filter.items" [ngClass]="{ 'selected-row': isSelected(item) }">
         <td class="sa-column">
           <input type="checkbox" [(ngModel)]="item.enabled">
+          <a href="#" (click)="onlyClicked($event, item)">only</a>
         </td>
         <td>
           <input class="text-input" type="text" [(ngModel)]="item.text">
@@ -34,10 +45,7 @@
            (colorPickerChange)="item.setField('color', $event)"/>
         </td>
         <td>
-          <a href="#" (click)="onlyClicked($event, item)">only</a>
-        </td>
-        <td>
-          <a class="" href="#" (click)="deleteClicked($event, item)">delete</a>
+          <a href="#" (click)="select($event, item)">select</a>
         </td>
       </tr>
       <tr>

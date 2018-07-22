@@ -4,7 +4,6 @@
       <col class="sa-column">
       <col class="header-column">
       <col class="color-column">
-      <col class="only-column">
       <col class="delete-column">
     </colgroup>
     <thead>
@@ -16,13 +15,11 @@
       <tr *ngFor="let item of filter.items">
         <td class="sa-column">
           <input type="checkbox" [(ngModel)]="item.enabled">
+          <a href="#" (click)="onlyClicked($event, item)">only</a>
         </td>
         <td>
           <input *ngIf="!filter.readOnly" class="text-input" type="text" [(ngModel)]="item.text">
           <span *ngIf="filter.readOnly" class="text-input">{{item.text}}</span>
-        </td>
-        <td>
-          <a href="#" (click)="onlyClicked($event, item)">only</a>
         </td>
         <td *ngIf="!filter.readOnly">
           <a class="" href="#" (click)="deleteClicked($event, item)">delete</a>

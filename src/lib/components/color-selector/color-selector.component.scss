@@ -12,7 +12,7 @@ th {
   text-align: center;
 }
 td {
-  padding: 0 0.5em 0.5em 0;
+  padding: 0.25em 0.5em 0.25em 0;
   text-align: center;
 }
 a {
@@ -23,7 +23,7 @@ table {
   width: 38em;
 }
 .sa-column {
-  width: 2em;
+  width: 4em;
 }
 .header-column {
   width: 20em;
@@ -31,15 +31,20 @@ table {
 .color-column {
   width: 10em;
 }
-.only-column {
-  width: 3em;
-}
-.delete-column {
-  width: 4em;
+.select-column {
+  width: 6.5em;
 }
 .text-input {
   width: 100%;
 }
 .color-input {
   width: 100%;
+}
+.selected-row {
+  background-color: lightgrey;
+}
+span.disabled {
+  color: gray;
+  cursor: not-allowed;
+  font-weight: normal;
 }

@@ -7,18 +7,7 @@ import { AppComponent } from "./app.component";
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
-import {
-  ColorSelectorComponent,
-  FileDropComponent,
-  SelectorsComponent,
-  FilteredViewComponent,
-  SiskiyouModule,
-  FileLoaderService,
-  LogAnalysisService,
-  LogMergerService,
-  LogParserService,
-  SettingsStorageService
-} from "siskiyou";
+import { SiskiyouModule } from "siskiyou";
 
 @NgModule({
   declarations: [

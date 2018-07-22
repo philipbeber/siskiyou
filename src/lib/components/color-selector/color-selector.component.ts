@@ -12,6 +12,7 @@ export class ColorSelectorComponent implements OnInit {
 
   private newText: string;
   private newColor: string;
+  private selectedItem: FilterItem;
 
   constructor(private cpService: ColorPickerService) {
     this.newColor = ColorSelectorComponent.createRainbowColor();
@@ -79,13 +80,14 @@ export class ColorSelectorComponent implements OnInit {
     }
   }
 
-  deleteClicked(event, clickedItem: FilterItem) {
+  deleteClicked(event) {
     event.stopPropagation();
     event.preventDefault();
-    this.filter.deleteItem(clickedItem);
+    this.filter.deleteItem(this.selectedItem);
+    this.selectedItem = null;
   }
 
-  selectAll(event) {
+  enableAll(event) {
     event.stopPropagation();
     event.preventDefault();
     for (let item of this.filter.items) {
@@ -93,11 +95,13 @@ export class ColorSelectorComponent implements OnInit {
     }
   }
 
-  selectNone(event) {
+  select(event, item) {
     event.stopPropagation();
-    for (let item of this.filter.items) {
-      item.enabled = false;
-    }
+    this.selectedItem = item;
+  }
+
+  isSelected(item) {
+    return this.selectedItem === item;
   }
 
   createClicked(event) {
@@ -110,5 +114,34 @@ export class ColorSelectorComponent implements OnInit {
     );
     this.newText = null;
     this.newColor = ColorSelectorComponent.createRainbowColor();
+  }
+
+  moveUp(event) {
+    event.stopPropagation();
+    let index = this.getSelectedIndex();
+    this.filter.moveItem(index, index - 1);
+  }
+
+  moveDown(event) {
+    event.stopPropagation();
+    let index = this.getSelectedIndex();
+    this.filter.moveItem(index, index + 1);
+  }
+
+  upDisabled() {
+    return !this.selectedItem || this.selectedItem === this.filter.items[0];
+  }
+
+  downDisabled() {
+    return !this.selectedItem || this.selectedItem === this.filter.items[this.filter.items.length - 1];
+  }
+
+  getSelectedIndex() {
+    for (let index = 0; index < this.filter.items.length; index++) {
+      if (this.filter.items[index] === this.selectedItem) {
+        return index;
+      }
+    }
+    return undefined;
   }
 }
