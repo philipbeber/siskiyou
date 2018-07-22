@@ -97,6 +97,7 @@ export class ColorSelectorComponent implements OnInit {
 
   select(event, item) {
     event.stopPropagation();
+    event.preventDefault();
     this.selectedItem = item;
   }
 
@@ -118,12 +119,14 @@ export class ColorSelectorComponent implements OnInit {
 
   moveUp(event) {
     event.stopPropagation();
+    event.preventDefault();
     let index = this.getSelectedIndex();
     this.filter.moveItem(index, index - 1);
   }
 
   moveDown(event) {
     event.stopPropagation();
+    event.preventDefault();
     let index = this.getSelectedIndex();
     this.filter.moveItem(index, index + 1);
   }
