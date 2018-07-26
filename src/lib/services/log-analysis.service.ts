@@ -78,7 +78,7 @@ export class LogAnalysisService {
   public getFilteredLines(): Array<LogLineView> {
     const lines: Array<LogLineView> = [];
     for (let line of this.lines) {
-      let view = new LogLineView(line.text, true);
+      let view = new LogLineView(line.text, true, line.index);
       for (let filter of this.filters) {
         filter.updateView(view, line);
         if (!view.visible) {

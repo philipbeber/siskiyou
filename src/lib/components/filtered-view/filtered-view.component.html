@@ -4,7 +4,7 @@
       <div *ngFor="let line of chunk.lines; trackBy: lineTrackByFn">
         <div *ngIf="line.view.visible" class="line"
           [style.backgroundColor]="line.view.color"
-          [class.selected]="line.selected" (click)="lineClick(line)">{{line.lineNumber}} {{line.view.text}}</div>
+          [class.selected]="line.selected" (click)="lineClick(line)">{{line.view.lineNumber}} {{line.view.text}}</div>
       </div>
     </div>
   </div>
