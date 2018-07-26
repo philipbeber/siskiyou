@@ -80,10 +80,10 @@ export class ColorSelectorComponent implements OnInit {
     }
   }
 
-  deleteClicked(event) {
+  deleteClicked(event, clickedItem: FilterItem) {
     event.stopPropagation();
     event.preventDefault();
-    this.filter.deleteItem(this.selectedItem);
+    this.filter.deleteItem(clickedItem);
     this.selectedItem = null;
   }
 
