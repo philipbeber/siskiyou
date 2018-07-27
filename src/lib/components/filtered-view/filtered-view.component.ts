@@ -214,6 +214,7 @@ class ChunkLine {
   public lineCount: number;
   public selected: boolean;
   public yPosition: number;
+  public text: string;
   private _view: LogLineView
   
   constructor(public lineNumber: number) {
@@ -222,6 +223,12 @@ class ChunkLine {
   public get view() { return this._view; }
   public set view(value) {
     this.lineCount = this.countLines(value.text);
+    this.text = value.text;
+    if (this.text && this.text.length && this.text[this.text.length - 1] == '\n') {
+      // Add a space to the end of the text if the last line is blank, otherwise it won't
+      // take up the right amount of vertical space
+      this.text += " ";
+    }
     this._view = value;
   }
 
