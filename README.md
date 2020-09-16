@@ -1,6 +1,6 @@
 # Siskiyou
 
-[![Build Status](https://travis-ci.org/philipbeber/siskiyou.svg?branch=master)](https://travis-ci.org/philipbeber/siskiyou)
+[![Build Status](https://api.travis-ci.com/philipbeber/siskiyou.svg?branch=master)](https://travis-ci.org/philipbeber/siskiyou)
 
 An extensible log viewer.
 
