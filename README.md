@@ -2,23 +2,25 @@
 
 [![Build Status](https://api.travis-ci.com/philipbeber/siskiyou.svg?branch=master)](https://travis-ci.com/philipbeber/siskiyou)
 
-An extensible log viewer.
+An extensible log viewer inspired by [TextAnalysisTool.NET](https://textanalysistool.github.io/). Like that tool Siskiyou is designed to excel at viewing, searching, and navigating large files quickly and efficiently. On top of that it contains extensibility points so you can customize it to parse arbitrary formats and extract useful information. 
 
 Live demo: <https://philipbeber.github.io/siskiyou/demo>.
 
 ## Extensibility points
 
+The following are implemented as Angular services which makes it easy for you to write your own implementations and inject them into Siskiyou.
+
 ### FileLoaderService
 
-Accepts a list of File objects and outputs a list of InputFile objects as they are loaded. The default implementation will recurse through zip files and output one InputFile for each leaf file.
+Unpacks the input files into distinct `InputFile` objects. The default implementation will produce one `InputFile` for each text file. It will also recurse through zip files and output one `InputFile` for each leaf file. A custom implementation might, for example, ignore certain files based on their file name.
 
 ### InputFile
 
-Turns a file object into lines of text. The default implementation opens File or JSZipObject objects and assumes they are plain text. It normalizes newlines, accepting '\n', \n\r' or \r\n'.
+Provides an interface to read the content of a file, turning it into lines of text. The default implementation opens `File` or `JSZipObject` objects and assumes they are plain text. It normalizes newlines, accepting '\n', \n\r' or \r\n'. If you wanted to add support for different character encodings this would be the place to do it.
 
 ### LogParserService
 
-Accepts an InputFile object and outputs zero or more Log objects (usually one). A Log object is mostly just a list of LogLine objects. The default implementation simply creates one LogLine for each line of text.
+Turns lines of text into log messages. Accepts an `InputFile` object and outputs zero or more `Log` objects (usually one). A `Log` object is mostly just a list of `LogLine` objects. The default implementation simply creates one `LogLine` for each line of text. A custom log parser might handle the case where log messages span multiple lines and logic is needed to combine them together. This would also be the place to extract custom information from the text and attach it to the LogLine object (e.g. timestamp, severity, etc).
 
 ### LogMergerService
 
@@ -28,26 +30,22 @@ Merges lines from multiple Log objects into a single list of lines. The default 
 
 ### Setup
 
-Install [node](https://nodejs.org/en/download/) / [@angular/cli](https://cli.angular.io/).
+Install [node](https://nodejs.org/en/download/) version 12.
 Run `npm install`
 
 ### Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod --aot false` flags for a production build.
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ### Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ### Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
