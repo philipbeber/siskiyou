@@ -40,3 +40,9 @@ table {
 .color-input {
   width: 100%;
 }
+
+.scroll-table-section {
+  overflow-y: scroll;
+  height: 200px;
+  display: block;
+}

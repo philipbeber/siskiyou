@@ -54,3 +54,9 @@ span.disabled {
 .up-down {
   margin: 0 0 0 -1.25em;
 }
+
+.scroll-table-section {
+  overflow-y: scroll;
+  height: 200px;
+  display: block;
+}

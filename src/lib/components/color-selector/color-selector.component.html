@@ -7,7 +7,7 @@
       <input type="checkbox" [(ngModel)]="filter.hideUnfiltered" class="hide-option"> hide uncolored lines
     </div>
   </div>
-  <table *ngIf="filter.enabled">
+  <table *ngIf="filter.enabled" class="scroll-table-section">
     <colgroup>
       <col class="sa-column">
       <col class="header-column">

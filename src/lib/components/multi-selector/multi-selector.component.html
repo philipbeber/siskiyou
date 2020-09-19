@@ -2,7 +2,7 @@
   <button class="btn btn-outline-primary" id="multiSelector" ngbDropdownToggle>{{data.name}}</button>
   <div ngbDropdownMenu aria-labelledby="multiSelector">
     <input type="checkbox" (click)="checkClicked($event)" [(ngModel)]="data.enabled"> enabled
-    <table *ngIf="data.headers && data.enabled">
+    <table *ngIf="data.headers && data.enabled" class="scroll-table-section">
       <thead>
         <tr>
           <th><a href="#" (click)="selectAll()" class="selectable-item">all</a></th>

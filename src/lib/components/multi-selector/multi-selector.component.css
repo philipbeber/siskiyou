@@ -10,3 +10,9 @@ table th a {
 .disabled {
   pointer-events: none;
 }
+
+.scroll-table-section {
+  overflow-y: scroll;
+  height: 200px;
+  display: block;
+}
