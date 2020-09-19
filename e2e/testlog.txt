@@ -1,0 +1,6 @@
+2018-02-15T13:35:51.523Z [ 6986] [INF] [component1] Something happened
+2018-02-15T13:35:51.524Z [ 6986] [ERR] [component2] An error happened
+2018-02-15T13:35:51.524Z [ 7777] [INF] [component1] Something happened
+2018-02-15T13:35:51.524Z [ 8888] [WRN] [component1] A warning
+2018-02-15T13:35:51.525Z [ 6986] [INF] [component1] Something happened
+2018-02-15T13:35:51.525Z [ 6986] [INF] [component1] Something happened

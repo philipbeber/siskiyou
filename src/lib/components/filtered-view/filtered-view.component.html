@@ -1,0 +1,11 @@
+<div #container class="scroll-container">
+  <div *ngFor="let chunk of chunks; trackBy: chunkTrackByFn" [style.height]="chunk.height + 'px'">
+    <div *ngIf="chunk.visible">
+      <div *ngFor="let line of chunk.lines; trackBy: lineTrackByFn">
+        <div *ngIf="line.view.visible" class="line"
+          [style.backgroundColor]="line.view.color"
+          [class.selected]="line.selected" (click)="lineClick(line)">{{line.view.lineNumber}} {{line.text}}</div>
+      </div>
+    </div>
+  </div>
+</div>

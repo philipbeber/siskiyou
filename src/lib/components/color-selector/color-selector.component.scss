@@ -1,0 +1,62 @@
+.filter {
+  padding: 0.25em;
+}
+.top-options {
+  display: flex;
+}
+.enabled-option {
+  margin: 0 5em 0.5em 0.25em
+}
+th {
+  padding: 0 0.5em 0 0;
+  text-align: center;
+}
+td {
+  padding: 0.25em 0.5em 0.25em 0;
+  text-align: center;
+}
+a {
+  font-weight: normal;
+}
+table {
+  table-layout: fixed;
+  width: 38em;
+}
+.sa-column {
+  width: 4em;
+}
+.header-column {
+  width: 20em;
+}
+.color-column {
+  width: 10em;
+}
+.delete-column {
+  width: 3em;
+}
+.select-column {
+  width: 3.5em;
+}
+.text-input {
+  width: 100%;
+}
+.color-input {
+  width: 100%;
+}
+.selected-row {
+  background-color: lightgrey;
+}
+span.disabled {
+  color: gray;
+  cursor: not-allowed;
+  font-weight: normal;
+}
+.up-down {
+  margin: 0 0 0 -1.25em;
+}
+
+.scroll-table-section {
+  overflow-y: scroll;
+  height: 200px;
+  display: block;
+}

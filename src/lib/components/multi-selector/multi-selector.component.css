@@ -1,0 +1,18 @@
+a {
+  padding: 0.25rem 1.5rem;
+}
+table {
+  width: 600px;
+}
+table th a {
+  font-weight: normal;
+}
+.disabled {
+  pointer-events: none;
+}
+
+.scroll-table-section {
+  overflow-y: scroll;
+  height: 200px;
+  display: block;
+}
