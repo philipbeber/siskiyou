@@ -49,3 +49,7 @@ Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.gi
 
 Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
