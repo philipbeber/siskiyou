@@ -1,5 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
 @import "bootstrap/dist/css/bootstrap.css";
+
+html, body, app-root {
+  height: 100%;
+  margin: 0;
+  display: block;
+}
 
 pre {
   margin: 0 5px;

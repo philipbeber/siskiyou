@@ -12,6 +12,7 @@ export class Filter {
 
   public constructor(public name: string) {
     this._enabled = true;
+    this._hideUnfiltered = false;
   }
 
   public get items(): ReadonlyArray<FilterItem> {

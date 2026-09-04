@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input, ChangeDetectorRef, NgZone } from '@angular/core';
 import { LogAnalysisService } from '../../services/log-analysis.service';
 import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -34,10 +34,17 @@ export class FilteredViewComponent implements OnInit, OnDestroy {
 
   @ViewChild('container', { static: true }) container: ElementRef;
 
-  constructor(private logAnalysis: LogAnalysisService) {
+  constructor(
+    private logAnalysis: LogAnalysisService,
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone
+  ) {
     console.log("FilteredViewComponent constructor");
     this.subscription = logAnalysis.changed.pipe(debounceTime(200)).subscribe(() => {
-      this.updateView();
+      this.ngZone.run(() => {
+        this.updateView();
+        this.cdr.markForCheck();
+      });
     });
    }
 

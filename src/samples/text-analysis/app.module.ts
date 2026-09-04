@@ -1,5 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, provideZoneChangeDetection } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 
 import { AppComponent } from "./app.component";
@@ -11,7 +11,7 @@ import { SiskiyouModule } from "siskiyou";
 @NgModule({
   declarations: [AppComponent],
   imports: [NgbModule, BrowserModule, FormsModule, SiskiyouModule],
-  providers: [],
+  providers: [provideZoneChangeDetection()],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
