@@ -9,7 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "pretty": "prettier --write 'src/**/*.ts'",
-    "builddocs": "ng build --configuration production --base-href /siskiyou/demo/ && rimraf demo && copyfiles -u 2 dist/siskiyou/browser/** demo",
+    "builddocs": "ng build --configuration production --base-href /siskiyou/demo/ && rimraf demo && copyfiles -u 3 \"dist/siskiyou/browser/**/*\" demo",
     "build:lib": "ng-packagr -p src/lib/ng-package.json -c src/lib/tsconfig.lib.json"
   },
   "private": true,

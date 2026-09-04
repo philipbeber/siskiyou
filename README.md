@@ -1,6 +1,6 @@
 # Siskiyou
 
-[![Build Status](https://api.travis-ci.com/philipbeber/siskiyou.svg?branch=master)](https://travis-ci.com/philipbeber/siskiyou)
+[![Build Status](https://github.com/philipbeber/siskiyou/actions/workflows/pages.yml/badge.svg)](https://github.com/philipbeber/siskiyou/actions/workflows/pages.yml)
 
 An extensible log viewer inspired by [TextAnalysisTool.NET](https://textanalysistool.github.io/). Like that tool Siskiyou is designed to excel at viewing, searching, and navigating large files quickly and efficiently. On top of that it contains extensibility points so you can customize it to parse arbitrary formats and extract useful information. 
 
