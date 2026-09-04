@@ -49,6 +49,7 @@ jobs:
 
       - name: Add demo to site
         run: |
+          sudo chown -R "$USER" _site
           mkdir -p _site/demo
           cp -R demo/. _site/demo/
 
