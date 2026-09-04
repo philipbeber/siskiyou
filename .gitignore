@@ -8,6 +8,7 @@
 .ng_pkg_build/
 siskiyou.tgz
 /siskiyou/
+.angular/
 
 # dependencies
 /node_modules

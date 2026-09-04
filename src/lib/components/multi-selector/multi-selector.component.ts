@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { SelectableItem, SelectableDataSet } from "../../model";
 
 @Component({
+  standalone: false,
   selector: "multi-selector",
   templateUrl: "./multi-selector.component.html",
   styleUrls: ["./multi-selector.component.css"]

@@ -6,13 +6,13 @@ import {
   NgZone,
   OnDestroy
 } from "@angular/core";
-import { Subscription } from "rxjs/Rx";
-import { TimerObservable } from "rxjs/observable/TimerObservable";
+import { Subscription, timer } from "rxjs";
 
 import { DroppedFile } from "./dropped-file.model";
 import { FileDropEvent } from "./file-drop-event.model";
 
 @Component({
+  standalone: false,
   selector: "file-drop",
   templateUrl: "./file-drop.component.html",
   styleUrls: ["./file-drop.component.css"]
@@ -91,8 +91,8 @@ export class FileDropComponent implements OnDestroy {
 
     this.preventAndStop(event);
 
-    const timer = TimerObservable.create(200, 200);
-    this.subscription = timer.subscribe(t => {
+    const timer$ = timer(200, 200);
+    this.subscription = timer$.subscribe(() => {
       if (this.stack.length === 0) {
         this.onFileDrop.emit(new FileDropEvent(this.files));
         this.files = [];

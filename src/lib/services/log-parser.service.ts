@@ -1,6 +1,8 @@
+import { Injectable } from "@angular/core";
 import { LogLine, InputFile, Log } from "../model";
-import { Observable, Subject, ReplaySubject } from "rxjs/Rx";
+import { Observable, ReplaySubject } from "rxjs";
 
+@Injectable()
 export class LogParserService {
   public parseFile(file: InputFile): Observable<Log> {
     const subject = new ReplaySubject<Log>();

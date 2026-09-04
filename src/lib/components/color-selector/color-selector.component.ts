@@ -3,6 +3,7 @@ import { FilterItem, Filter, ColorFilter } from "../../model";
 import { ColorPickerService } from "../color-picker";
 
 @Component({
+  standalone: false,
   selector: "color-selector",
   templateUrl: "./color-selector.component.html",
   styleUrls: ["./color-selector.component.scss"]
@@ -10,9 +11,9 @@ import { ColorPickerService } from "../color-picker";
 export class ColorSelectorComponent implements OnInit {
   @Input() public filter: Filter;
 
-  private newText: string;
-  private newColor: string;
-  private selectedItem: FilterItem;
+  newText: string;
+  newColor: string;
+  selectedItem: FilterItem;
 
   constructor(private cpService: ColorPickerService) {
     this.newColor = ColorSelectorComponent.createRainbowColor();

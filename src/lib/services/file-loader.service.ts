@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import * as JSZip from "jszip";
+import JSZip from "jszip";
 
 import { Log } from "../model/log";
 import { InputFile } from "../model/input-file";

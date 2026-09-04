@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { FilterItem, Filter } from "../../model";
 
 @Component({
+  standalone: false,
   selector: "text-selector",
   templateUrl: "./text-selector.component.html",
   styleUrls: ["./text-selector.component.scss"]
@@ -9,7 +10,7 @@ import { FilterItem, Filter } from "../../model";
 export class TextSelectorComponent implements OnInit {
   @Input() public filter: Filter;
 
-  private newText: string;
+  newText: string;
 
   constructor() {
   }

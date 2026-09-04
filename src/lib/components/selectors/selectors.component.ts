@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 import { LogAnalysisService } from "../../services/log-analysis.service";
 
 @Component({
+  standalone: false,
   selector: "selectors",
   templateUrl: "./selectors.component.html",
   styleUrls: ["./selectors.component.css"]

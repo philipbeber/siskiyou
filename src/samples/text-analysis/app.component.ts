@@ -4,6 +4,7 @@ import { Filter, ColorFilter, HideFilter, FileFilter } from "siskiyou";
 import { CustomFileLoaderService } from "./custom-file-loader";
 
 @Component({
+  standalone: false,
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
@@ -18,6 +19,7 @@ export class AppComponent {
   hideFilter: Filter;
   fileFilter: FileFilter;
   noFiles = true;
+  noLines = false;
 
   constructor(
     private logAnalysis: LogAnalysisService,

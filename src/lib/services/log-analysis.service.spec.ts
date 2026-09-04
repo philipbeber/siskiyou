@@ -5,7 +5,7 @@ import { FileLoaderService } from "./file-loader.service";
 import { InputFile, Log } from "../model";
 import { LogMergerService } from "./log-merger.service";
 import { LogParserService } from "./log-parser.service";
-import { Observable, Subject, ReplaySubject } from "rxjs/Rx";
+import { ReplaySubject } from "rxjs";
 
 describe("LogAnalysisService", () => {
   let fileLoaderServiceSpy: jasmine.SpyObj<FileLoaderService>;
@@ -36,9 +36,15 @@ describe("LogAnalysisService", () => {
         }
       ]
     });
-    fileLoaderServiceSpy = TestBed.get(FileLoaderService);
-    logMergerServiceSpy = TestBed.get(LogMergerService);
-    logParserServiceSpy = TestBed.get(LogParserService);
+    fileLoaderServiceSpy = TestBed.inject(
+      FileLoaderService
+    ) as jasmine.SpyObj<FileLoaderService>;
+    logMergerServiceSpy = TestBed.inject(
+      LogMergerService
+    ) as jasmine.SpyObj<LogMergerService>;
+    logParserServiceSpy = TestBed.inject(
+      LogParserService
+    ) as jasmine.SpyObj<LogParserService>;
     inputFile1 = jasmine.createSpyObj("InputFile", ["getLines"]);
     jFile1 = jasmine.createSpyObj("File", ["name"]);
     log1 = jasmine.createSpyObj("Log", ["lines"]);

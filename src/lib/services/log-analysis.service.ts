@@ -6,7 +6,8 @@ import {
   Filter,
   LogLineView
 } from "../model";
-import { Subject, Observable, Subscription } from "rxjs";
+import { Subject, Observable } from "rxjs";
+import { mergeMap } from "rxjs/operators";
 import { FileLoaderService } from "./file-loader.service";
 import { LogMergerService } from "./log-merger.service";
 import { LogParserService } from "./log-parser.service";
@@ -40,10 +41,12 @@ export class LogAnalysisService {
       const newLogs: Log[] = [];
       this.fileLoader
         .loadFiles(files)
-        .flatMap(file => {
-          this.fileAddedSubject.next(file);
-          return this.logParser.parseFile(file);
-        })
+        .pipe(
+          mergeMap(file => {
+            this.fileAddedSubject.next(file);
+            return this.logParser.parseFile(file);
+          })
+        )
         .subscribe({
           next: log => {
             if (log) {

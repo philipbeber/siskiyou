@@ -30,7 +30,7 @@ Merges lines from multiple Log objects into a single list of lines. The default 
 
 ### Setup
 
-Install [node](https://nodejs.org/en/download/) version 12.
+Install [Node.js](https://nodejs.org/en/download/) version 22.22.3 or newer.
 Run `npm install`
 
 ### Development server

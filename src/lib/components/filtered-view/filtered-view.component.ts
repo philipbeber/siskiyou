@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef, OnDestroy, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core';
 import { LogAnalysisService } from '../../services/log-analysis.service';
-import { Subscription } from 'rxjs';
-import * as momentNs from 'moment';
-const moment = momentNs;
-import { LogLineColorView, LogLine, LogLineView } from '../../model';
-import { Observable } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import moment from 'moment';
+import { LogLine, LogLineView } from '../../model';
 
 // Turns log files into HTML. Because browsers don't cope well with a DOM that contains tens of 1000s of lines of text
 // (even if in a single pre element) the lines are grouped into chunks, and DOM is only generated for chunks that are
 // visible or close to being scrolled into view. Within a chunk lines are grouped into sections where each section is
 // the same color. One 'pre' element is used for each section.
 @Component({
+  standalone: false,
   selector: 'filtered-view',
   templateUrl: './filtered-view.component.html',
   styleUrls: ['./filtered-view.component.scss']
@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
 export class FilteredViewComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription;
-  private chunks: Array<Chunk> = [];
+  public chunks: Array<Chunk> = [];
   // Line height in pixels. Needs to match the value for font-size*line-height in the scss file.
   private lineHeight: number = 15;
   private lines: LogLine[];
@@ -32,17 +32,17 @@ export class FilteredViewComponent implements OnInit, OnDestroy {
   // Chunks that get within this number of lines of the visible area will also have DOM generated.
   @Input() public chunkHysteresis: number = 100;
 
-  @ViewChild('container') container: ElementRef;
+  @ViewChild('container', { static: true }) container: ElementRef;
 
   constructor(private logAnalysis: LogAnalysisService) {
     console.log("FilteredViewComponent constructor");
-    this.subscription = logAnalysis.changed.debounceTime(200).subscribe(() => {
+    this.subscription = logAnalysis.changed.pipe(debounceTime(200)).subscribe(() => {
       this.updateView();
     });
    }
 
   ngOnInit() {
-    Observable.fromEvent(this.container.nativeElement, 'scroll').subscribe(() => {
+    fromEvent(this.container.nativeElement, 'scroll').subscribe(() => {
       if (!this.nextScrollTimer) {
         const now = Date.now();
         if (this.lastScrollTime && (now - this.lastScrollTime) < 200) {
@@ -73,7 +73,7 @@ export class FilteredViewComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  private lineClick(line: ChunkLine) {
+  lineClick(line: ChunkLine) {
     if (line === this.selectedLine) {
       return;
     }

@@ -1,7 +1,7 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Subject, ReplaySubject, Observable } from "rxjs/Rx";
+import { Subject } from "rxjs";
 
 import { FilteredViewComponent } from './filtered-view.component';
 import { LogAnalysisService } from '../../services/log-analysis.service';
@@ -40,14 +40,14 @@ describe('FilteredViewComponent', () => {
   let de: DebugElement;
   let ne: HTMLDivElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     const laSpy = new FakeLogAnalysis();
     TestBed.configureTestingModule({
       declarations: [ FilteredViewComponent ],
       providers: [ { provide: LogAnalysisService, useValue: laSpy }]
     })
     .compileComponents();
-    fakeLogAnalysis = TestBed.get(LogAnalysisService);
+    fakeLogAnalysis = TestBed.inject(LogAnalysisService);
   }));
 
   beforeEach(() => {

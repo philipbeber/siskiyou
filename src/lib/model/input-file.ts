@@ -1,4 +1,4 @@
-import * as JSZip from "jszip";
+import JSZip from "jszip";
 
 export class InputFile {
   public constructor(
@@ -20,7 +20,7 @@ export class InputFile {
     return new Promise<string>((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.onload = () => {
-        resolve(fileReader.result);
+        resolve(fileReader.result as string);
       };
       fileReader.readAsText(file);
     });
