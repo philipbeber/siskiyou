@@ -45,6 +45,15 @@ Run `npm run build` to build the project. The build artifacts will be stored in 
 
 Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+### Running performance tests
+
+These are separate from the unit tests and generate a million-line log in memory, so they are slow and use a lot of RAM.
+
+- `npm run test:perf` — headless Chrome, single run. Asserts that load/parse, hide filters, color filters, first display, and scrolling stay within time budgets, and that the view stays virtualized.
+- `npm run test:perf:open` — same specs in a real Chrome window (watch mode). Use the Jasmine reporter for pass/fail, the browser console for `[perf]` timings, and Karma’s DEBUG page to inspect the `filtered-view` fixture.
+
+These commands look for Google Chrome, Chromium, Microsoft Edge, or Playwright’s Chrome for Testing. Override the binary with `CHROME_BIN` if needed.
+
 ### Running end-to-end tests
 
 Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

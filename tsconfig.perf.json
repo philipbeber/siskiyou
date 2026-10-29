@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/perf",
+    "types": ["jasmine", "@angular/localize"]
+  },
+  "include": ["src/**/*.perf.spec.ts", "src/**/*.d.ts"]
+}

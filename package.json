@@ -8,6 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:perf": "ng test --configuration=performance",
+    "test:perf:open": "ng test --configuration=performance-open",
     "pretty": "prettier --write 'src/**/*.ts'",
     "builddocs": "ng build --configuration production --base-href /siskiyou/demo/ && rimraf demo && copyfiles -u 3 \"dist/siskiyou/browser/**/*\" demo",
     "build:lib": "ng-packagr -p src/lib/ng-package.json -c src/lib/tsconfig.lib.json"

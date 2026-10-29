@@ -104,7 +104,26 @@
               }
             ],
             "styles": ["src/styles.css"],
-            "scripts": []
+            "scripts": [],
+            "exclude": ["**/*.perf.spec.ts"]
+          },
+          "configurations": {
+            "performance": {
+              "tsConfig": "tsconfig.perf.json",
+              "karmaConfig": "karma.perf.conf.js",
+              "include": ["**/*.perf.spec.ts"],
+              "exclude": [],
+              "watch": false,
+              "browsers": "ChromeHeadless"
+            },
+            "performance-open": {
+              "tsConfig": "tsconfig.perf.json",
+              "karmaConfig": "karma.perf.conf.js",
+              "include": ["**/*.perf.spec.ts"],
+              "exclude": [],
+              "watch": true,
+              "browsers": "Chrome"
+            }
           }
         }
       }
