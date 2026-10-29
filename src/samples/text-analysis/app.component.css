@@ -39,6 +39,12 @@
   position: absolute;
 }
 
+.no-files-copy,
 .no-files p {
   margin: auto;
+  text-align: center;
+}
+
+.no-files-copy p {
+  margin-bottom: 1rem;
 }

@@ -1,4 +1,8 @@
-<file-drop (window:keydown)="keyDown($event)" class="file-drop" (onFileDrop)="dropped($event)">
+<file-drop
+  (window:keydown)="keyDown($event)"
+  class="file-drop"
+  (onFileDrop)="dropped($event)"
+>
   <div class="main-area">
     <div class="container-fluid selectors">
       <div class="row">
@@ -9,8 +13,20 @@
     </div>
     <div class="filtered-display">
       <filtered-view></filtered-view>
+      <div *ngIf="loadingDemo" class="no-files">
+        <p>Generating and loading 1,000,000 lines…</p>
+      </div>
       <div *ngIf="noFiles" class="no-files">
-        <p>Drop some files to get started</p>
+        <div class="no-files-copy">
+          <p>Drop some files to get started</p>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="loadLargeDemo()"
+          >
+            Load 1,000,000-line demo
+          </button>
+        </div>
       </div>
       <div *ngIf="noLines" class="no-files">
         <p>All lines are hidden by filters</p>

@@ -50,9 +50,9 @@ Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.gi
 These are separate from the unit tests and generate a million-line log in memory, so they are slow and use a lot of RAM.
 
 - `npm run test:perf` — headless Chrome, single run. Asserts that load/parse, hide filters, color filters, first display, and scrolling stay within time budgets, and that the view stays virtualized.
-- `npm run test:perf:open` — same specs in a real Chrome window (watch mode). Use the Jasmine reporter for pass/fail, the browser console for `[perf]` timings, and Karma’s DEBUG page to inspect the `filtered-view` fixture.
+- `npm run test:perf:open` — starts the real demo app and opens it with a generated 1,000,000-line log already loaded (ERROR/WARN coloring applied). Scroll, hide lines, and add filters there to check that it feels smooth.
 
-These commands look for Google Chrome, Chromium, Microsoft Edge, or Playwright’s Chrome for Testing. Override the binary with `CHROME_BIN` if needed.
+`test:perf` looks for Google Chrome, Chromium, Microsoft Edge, or Playwright’s Chrome for Testing. Override the binary with `CHROME_BIN` if needed. You can also load the large demo from a normal `npm start` session with the empty-state button or by opening `/?largeFile`.
 
 ### Running end-to-end tests
 
